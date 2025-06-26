@@ -6,6 +6,7 @@ nav:
   - Notes:
     - 大二上:
       - index: class_notes/2_1/index.md
+      - 汇编语言: class_notes/2_1/asm.md
     - 大二下:
       - index: class_notes/2_2/index.md
       - 形式语言与编译: class_notes/2_2/compile.md
