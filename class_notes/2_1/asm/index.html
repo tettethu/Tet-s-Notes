@@ -3389,8 +3389,8 @@
 <li>0的表示唯一</li>
 </ul>
 <h2 id="2-80x86">2. 80x86计算机组织<a class="headerlink" href="#2-80x86" title="Permanent link">&para;</a></h2>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_0.png" />
-<strong><em>answer</em></strong></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_0.png" /></p>
+<p><strong><em>answer</em></strong></p>
 <ol>
 <li>软件和硬件</li>
 <li>运算器&amp;控制器&amp;寄存器<ol>
@@ -3460,11 +3460,11 @@
 <li>SS</li>
 <li>DS</li>
 <li>ES
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_1.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_2.png" /></li>
+<img alt="img" src="/imgs/asm/asm汇编语言 notes_1.png" /></li>
 </ol>
 </li>
 </ol>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_2.png" /></p>
 <h4 id="flags">FLAGS<a class="headerlink" href="#flags" title="Permanent link">&para;</a></h4>
 <h4 id="_6">条件码（状态）标志<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
 <table>
@@ -3604,17 +3604,19 @@
 <p>-&gt; 描述符中记录了<code>段基地址(80286-&gt;24 bit, 80386-&gt; 32 bit)</code>, <code>段大小(16/20)</code>, <code>访问权字节(1 byte)</code></p>
 <pre><code>对于80386: 还有`颗粒度G(0-&gt;byte, 1-&gt;page(4KB)`, `D`, `AVL`
 </code></pre>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_3.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_4.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_5.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_6.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_7.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_3.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_4.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_5.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_6.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_7.png" /></p>
 <h3 id="_12">外部设备<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
 <p>三种寄存器</p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_8.png" />
-- 有时候,简单设备会将 <em>状态寄存器</em>和<em>命令寄存器</em>合并为<em>控制寄存器</em>
-- 每个寄存器给一个端口号port
-- I/O地址总线是16位, I/O地址空间为64K, 端口地址范围为<code>0000H-FFFFH</code></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_8.png" /></p>
+<ul>
+<li>有时候,简单设备会将 <em>状态寄存器</em>和<em>命令寄存器</em>合并为<em>控制寄存器</em></li>
+<li>每个寄存器给一个端口号port</li>
+<li>I/O地址总线是16位, I/O地址空间为64K, 端口地址范围为<code>0000H-FFFFH</code></li>
+</ul>
 <h4 id="biosdos">BIOS/DOS<a class="headerlink" href="#biosdos" title="Permanent link">&para;</a></h4>
 <blockquote>
 <p>BIOS: basic input/output system
@@ -3638,13 +3640,15 @@ DOS: disk operating system</p>
     其他情况则缺省值均为DS</p>
 </blockquote>
 <h6 id="16-bit-808680286">16 bit: 8086/80286<a class="headerlink" href="#16-bit-808680286" title="Permanent link">&para;</a></h6>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_12.png" />
-- 直接寻址:<code>mov ax, val</code>: <strong>注意，[100h]是汇编后的表示，应该使用符号地址,[100h]/ds:[100]会被认为是立即数</strong>
-- 寄存器间接寻址:<code>mov ax, [bx]</code>
-- <code>mov as, 100H[bx]</code>
-- <code>mov ax, [bx][si]</code> / <code>mov ax, [bx+si]</code> <strong>不能同时使用bx&amp;bp/si&amp;di</strong>
-- <code>mov ax, 100H[bx][si]</code> / <code>mov ax, [100H+bx+si]</code>
-100H<strong>应该</strong>用符号变量表示</p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_12.png" /></p>
+<ul>
+<li>直接寻址:<code>mov ax, val</code>: <strong>注意，[100h]是汇编后的表示，应该使用符号地址,[100h]/ds:[100]会被认为是立即数</strong></li>
+<li>寄存器间接寻址:<code>mov ax, [bx]</code></li>
+<li><code>mov as, 100H[bx]</code></li>
+<li><code>mov ax, [bx][si]</code> / <code>mov ax, [bx+si]</code> <strong>不能同时使用bx&amp;bp/si&amp;di</strong></li>
+<li><code>mov ax, 100H[bx][si]</code> / <code>mov ax, [100H+bx+si]</code>
+100H<strong>应该</strong>用符号变量表示</li>
+</ul>
 <p><em>记记名字</em></p>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_13.png" /></p>
 <h6 id="32-bit-80386">32 bit: 80386及以后<a class="headerlink" href="#32-bit-80386" title="Permanent link">&para;</a></h6>
@@ -3684,24 +3688,28 @@ DOS: disk operating system</p>
 </blockquote>
 <h3 id="_17">机器语言指令概况<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
 <h4 id="_18">操作码的机器语言表示<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h4>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_15.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_16.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_15.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_16.png" /></p>
 <h4 id="_19">指令执行时间<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h4>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_17.png" /></p>
 <h3 id="_20">指令大全<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_18.png" /></p>
 <h4 id="_21">自查<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h4>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_19.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_20.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_19.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_20.png" /></p>
 <h4 id="_22">数据传送<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h4>
 <ul>
 <li><em>注意传送的限制</em></li>
 <li><code>push/pop</code>不允许立即数操作，可以reg/mem/segreg</li>
 <li><code>pushf/popf</code>: 专门用来保存FLAGS</li>
 <li><em>movsx, movzx</em>方便实现对有/无符号数的扩展</li>
-<li><em>pusha,pusad,popa,popad</em>: 80286/80386
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_21.png" /></li>
-<li><code>I/O</code>: 前256端口可直接指定,之后先给DX</li>
+<li>
+<p><em>pusha,pusad,popa,popad</em>: 80286/80386
+<img alt="img" src="/imgs/asm/asm汇编语言 notes_21.png" /></p>
+</li>
+<li>
+<p><code>I/O</code>: 前256端口可直接指定,之后先给DX</p>
+</li>
 <li><code>xlat</code> / <code>xlat opr</code>: bx-&gt;table, ax-&gt;value</li>
 <li><code>lea/lds/les/lss/lfs/lgs reg, src</code>: src为存储器寻址, reg不能是段寄存器, <em>传送有效地址而非取地址中的值</em>
 ...</li>
@@ -3769,8 +3777,8 @@ DOS: disk operating system</p>
 <blockquote>
 <p><strong>Warning</strong>: dst不可为段寄存器/立即数</p>
 </blockquote>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_26.png" />
-<strong>RCL/RCR</strong>: 带进位的循环移位指令，补齐的是CF原来的值，而不带进位的是将最后移出的值同时补齐和赋给CF</p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_26.png" /></p>
+<p><strong>RCL/RCR</strong>: 带进位的循环移位指令，补齐的是CF原来的值，而不带进位的是将最后移出的值同时补齐和赋给CF</p>
 <h6 id="flags_1"># <strong>移位指令对于FLAGS的影响</strong><a class="headerlink" href="#flags_1" title="Permanent link">&para;</a></h6>
 <ul>
 <li>CF: 都有影响，看移出去的是0/1</li>
@@ -3779,8 +3787,8 @@ DOS: disk operating system</p>
 <li>AF: 无定义</li>
 </ul>
 <p>386及以后有<em>位测试，位扫描, 双精度移位操作</em></p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_27.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_28.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_27.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_28.png" /></p>
 <h4 id="_29">串处理指令<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h4>
 <ul>
 <li>隐含寻址模式，不能更改，只能用es:di,ds:si</li>
@@ -3828,9 +3836,9 @@ jc=jb, jnc=jnb=jae</p>
 <h5 id="_34">中断指令<a class="headerlink" href="#_34" title="Permanent link">&para;</a></h5>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_30.png" /></p>
 <h4 id="_35">处理机控制指令<a class="headerlink" href="#_35" title="Permanent link">&para;</a></h4>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_31.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_32.png" />
-还有一些，但是ppt上只有这几个</p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_31.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_32.png" /></p>
+<p>还有一些，但是ppt上只有这几个</p>
 <h2 id="4">4. 汇编语言程序格式<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <ul>
 <li>汇编指令包括：<strong>机器指令，伪指令，宏指令</strong></li>
@@ -3841,26 +3849,28 @@ jc=jb, jnc=jnb=jae</p>
 <ul>
 <li><code>xxx segment ... xxx ends</code>,<ul>
 <li><code>s_name segment [align_type] [combine_type] [use_type] ['class']</code>
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_33.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_34.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_35.png" /></li>
+<img alt="img" src="/imgs/asm/asm汇编语言 notes_33.png" /></li>
 </ul>
 </li>
+</ul>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_34.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_35.png" /></p>
+<ul>
 <li><code>assume xxx:xxx/nothing</code>: 不对段寄存器赋值，仅为了让汇编程序理解</li>
 <li>新版：<code>model</code>/<code>简化的段定义伪操作</code><ul>
 <li>model:
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_36.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_37.png" /></li>
-<li>简化的段定义操作
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_38.png" /><ul>
-<li>与简化段定义有关的预定义符号
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_39.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_40.png" /></li>
+<img alt="img" src="/imgs/asm/asm汇编语言 notes_36.png" /></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_37.png" /></p>
+<pre><code>- 简化的段定义操作
+</code></pre>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_38.png" /></p>
+<pre><code>    - 与简化段定义有关的预定义符号
+</code></pre>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_39.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_40.png" /></p>
 <h4 id="_39">程序命名和结束伪操作<a class="headerlink" href="#_39" title="Permanent link">&para;</a></h4>
 <ul>
 <li><code>name</code></li>
@@ -3933,12 +3943,12 @@ jc=jb, jnc=jnb=jae</p>
 <h4 id="_46">表达式<a class="headerlink" href="#_46" title="Permanent link">&para;</a></h4>
 <p><em>定义</em>：常数/寄存器/标号/变量 + <strong>操作符</strong></p>
 <h5 id="_47">操作符<a class="headerlink" href="#_47" title="Permanent link">&para;</a></h5>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_41.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_42.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_43.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_44.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_45.png" />
-<strong>this</strong></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_41.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_42.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_43.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_44.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_45.png" /></p>
+<p><strong>this</strong></p>
 <p>相当于对于同一个内存地址，起一个不同类型的别名</p>
 <pre><code class="language-asm">; 一种用法, 数据段中给word类型变量起一个byte类型的别名，需要哪个类型用哪个名字
 val1 equ this byte
@@ -3954,12 +3964,12 @@ jmp_near:
 <ul>
 <li>准备汇编上机环境（masm/tasm)</li>
 <li>编写汇编源程序
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_46.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_47.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_48.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_49.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_50.png" /></li>
+<img alt="img" src="/imgs/asm/asm汇编语言 notes_46.png" /></li>
 </ul>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_47.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_48.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_49.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_50.png" /></p>
 <h4 id="dosexe">DOS装入.exe文件过程<a class="headerlink" href="#dosexe" title="Permanent link">&para;</a></h4>
 <ol>
 <li>PSP(256 bytes)</li>
@@ -3991,8 +4001,8 @@ int 21h
 <h2 id="5">5. 循环与分支程序<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_51.png" /></p>
 <h3 id="_49">循环<a class="headerlink" href="#_49" title="Permanent link">&para;</a></h3>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_52.png" />
-<strong>实验：打印bx的十六进制形式</strong></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_52.png" /></p>
+<p><strong>实验：打印bx的十六进制形式</strong></p>
 <blockquote>
 <p>ah=2-&gt;按照ascii码打印dl</p>
 </blockquote>
@@ -4076,8 +4086,8 @@ name.val2 dw 2
 name.val3 dw 1
 </code></pre>
 <p><strong>可以自由进行初始化，也可以覆盖struc定义中的默认初值</strong></p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_55.png" />
-<strong>这里的struc比较宽松，每一个地址表达式都可以作为struc_name, .xxx就是将地址表达式的地址作为开头时其对应成员的偏移地址</strong>, 如下</p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_55.png" /></p>
+<p><strong>这里的struc比较宽松，每一个地址表达式都可以作为struc_name, .xxx就是将地址表达式的地址作为开头时其对应成员的偏移地址</strong>, 如下</p>
 <pre><code class="language-asm">stu struc
     val1 dw ?
     val2 dw ?
@@ -4118,11 +4128,13 @@ code ends
 endm
 </code></pre>
 <p>和C的宏类似，只是文本的替换</p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_57.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_58.png" />
-- 没有local定义的标号会被当作宏定义之外的标号
-- <code>purge macro_name</code> 可以删除宏定义
-- 当宏指令名与已有标号/变量/指令助记符冲突时，宏优先</p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_57.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_58.png" /></p>
+<ul>
+<li>没有local定义的标号会被当作宏定义之外的标号</li>
+<li><code>purge macro_name</code> 可以删除宏定义</li>
+<li>当宏指令名与已有标号/变量/指令助记符冲突时，宏优先</li>
+</ul>
 <h4 id="_54">宏操作符<a class="headerlink" href="#_54" title="Permanent link">&para;</a></h4>
 <h5 id="_55">&amp; 合并符号<a class="headerlink" href="#_55" title="Permanent link">&para;</a></h5>
 <h5 id="_56">;; 不会展开的注释<a class="headerlink" href="#_56" title="Permanent link">&para;</a></h5>
@@ -4159,8 +4171,8 @@ push bx
 push cx
 push dx
 </code></pre>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_63.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_64.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_63.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_64.png" /></p>
 <h3 id="_63">条件汇编<a class="headerlink" href="#_63" title="Permanent link">&para;</a></h3>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_65.png" /></p>
 <h5 id="example">example<a class="headerlink" href="#example" title="Permanent link">&para;</a></h5>
@@ -4278,8 +4290,8 @@ call disp
 </code></pre>
 <p><strong>后面这种当cx == 0或者表达式成立的时候退出循环(这种仅支持表示判断相等/不等的表达式)</strong></p>
 <h2 id="8">8. 输入输出程序设计<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_66.png" />
-<strong>in/out控制一切设备</strong></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_66.png" /></p>
+<p><strong>in/out控制一切设备</strong></p>
 <p>有三种方式：</p>
 <ul>
 <li>查询方式</li>
@@ -4289,14 +4301,14 @@ call disp
 </li>
 </ul>
 <h3 id="dma">DMA<a class="headerlink" href="#dma" title="Permanent link">&para;</a></h3>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_67.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_68.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_69.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_70.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_67.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_68.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_69.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_70.png" /></p>
 <h3 id="example_1">Example<a class="headerlink" href="#example_1" title="Permanent link">&para;</a></h3>
 <p><strong>发声程序</strong></p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_71.png" />
-<strong>查询方式打印输出</strong></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_71.png" /></p>
+<p><strong>查询方式打印输出</strong></p>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_72.png" /></p>
 <h3 id="_65">中断<a class="headerlink" href="#_65" title="Permanent link">&para;</a></h3>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_73.png" /></p>
@@ -4316,8 +4328,8 @@ call disp
 <h6 id="imr-21h"># 中断屏蔽寄存器IMR 21H<a class="headerlink" href="#imr-21h" title="Permanent link">&para;</a></h6>
 <p><em>在实验中，默认值为F8h(11111000)，即开了彩显，键盘，定时器</em></p>
 <p><em>经实验，关掉键盘还真就输入不了了</em></p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_74.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_75.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_74.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_75.png" /></p>
 <h6 id="20h"># 中断命令寄存器 20H<a class="headerlink" href="#20h" title="Permanent link">&para;</a></h6>
 <p><img alt="img" src="/imgs/asm/asm汇编语言 notes_76.png" /></p>
 <h4 id="_68">软件中断(内中断)<a class="headerlink" href="#_68" title="Permanent link">&para;</a></h4>
@@ -4325,11 +4337,11 @@ call disp
 <h5 id="_69">存取中断向量 &amp; 中断向量表<a class="headerlink" href="#_69" title="Permanent link">&para;</a></h5>
 <p><strong>中断向量地址： <span class="arithmatex">\(\text{中断类型号}\times 4\)</span></strong></p>
 <p><strong>256个中断向量，每个占4字节，低字节为IP，高字节为CS，一共占1KB，位于0000:0000-0000:03FFH</strong></p>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_78.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_79.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_78.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_79.png" /></p>
 <h4 id="_70">中断优先级<a class="headerlink" href="#_70" title="Permanent link">&para;</a></h4>
-<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_80.png" />
-<img alt="img" src="/imgs/asm/asm汇编语言 notes_81.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_80.png" /></p>
+<p><img alt="img" src="/imgs/asm/asm汇编语言 notes_81.png" /></p>
 <h4 id="_71">中断嵌套<a class="headerlink" href="#_71" title="Permanent link">&para;</a></h4>
 <p>系统定时器，每秒中断18.2次，终端类型8，每次中断会调用指令 <code>int 1ch</code></p>
 <blockquote>
