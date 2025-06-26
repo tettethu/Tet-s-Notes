@@ -1,0 +1,2827 @@
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>形式语言与编译 - Tet's Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="页眉">
+    <a href="../../.." title="Tet&#39;s Notes" class="md-header__button md-logo" aria-label="Tet's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Tet's Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              形式语言与编译
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="搜索" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="查找">
+        
+        <button type="reset" class="md-search__icon md-icon" title="清空当前内容" aria-label="清空当前内容" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="导航栏" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Tet&#39;s Notes" class="md-nav__button md-logo" aria-label="Tet's Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Tet's Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../contribution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contrubution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Notes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Notes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    大二上
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            大二上
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2_1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../2_1/asm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    汇编语言
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    大二下
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            大二下
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    index
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    形式语言与编译
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    形式语言与编译
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recource
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 绪论
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 有穷自动机(FA)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 有穷自动机(FA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DFA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      表示形式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon -NFA\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      考试题型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="考试题型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      画状态转移图
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      归纳法证明/描述DFA的语言
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa-dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFA-&gt;DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon-NFA\)简化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa-dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon-NFA\) -&gt; DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计DFA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-re" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 正则 RE
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 正则 RE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      泵引理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA最小化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DFA最小化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      填表算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hopcroft" class="md-nav__link">
+    <span class="md-ellipsis">
+      霍普克罗夫特(Hopcroft)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 词法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 词法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      多语言联合DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concepts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLDR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-context-free-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 上下文无关语言 (Context-Free-Language)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 上下文无关语言 (Context-Free-Language)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      CFG的化简
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 自上而下的语法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 自上而下的语法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      预测分析法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="预测分析法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      递归的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      非递归的 -- 下推自动机
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pda" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 下推自动机 PDA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 下推自动机 PDA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 自下而上语法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 自下而上语法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      回归课本
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="回归课本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      例8.4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 语义分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 语义分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      属性文法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      语法制导的属性求值
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="语法制导的属性求值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      LR制导的属性求职过程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      程序声明的语义分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      习题9.3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 中间代码生成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 中间代码生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basics: 中间代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点1：将高级语言语句翻译成三地址代码段
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="考点1：将高级语言语句翻译成三地址代码段">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 翻译简单变量算数表达式赋值语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 翻译下标变量算数表达式赋值语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 布尔表达式与控制语句
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点2：对于给定代码段，给出带注释语法树作为翻译过程和结果的解释
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3for" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点3：给一个文法，设计一个属性文法将for翻译为三地址代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点4：采用全局名的翻译样例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. 运行时环境
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recource" class="md-nav__link">
+    <span class="md-ellipsis">
+      Recource
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grade" class="md-nav__link">
+    <span class="md-ellipsis">
+      Grade
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. 绪论
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-fa" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. 有穷自动机(FA)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. 有穷自动机(FA)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DFA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      表示形式
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon -NFA\)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      考试题型
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="考试题型">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      画状态转移图
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      归纳法证明/描述DFA的语言
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nfa-dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      NFA-&gt;DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon-NFA\)简化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsilon-nfa-dfa" class="md-nav__link">
+    <span class="md-ellipsis">
+      \(\epsilon-NFA\) -&gt; DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      设计DFA
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-re" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. 正则 RE
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. 正则 RE">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      泵引理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      DFA最小化
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="DFA最小化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      填表算法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hopcroft" class="md-nav__link">
+    <span class="md-ellipsis">
+      霍普克罗夫特(Hopcroft)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. 词法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. 词法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dfa_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      多语言联合DFA
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concepts_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Concepts
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tldr" class="md-nav__link">
+    <span class="md-ellipsis">
+      TLDR
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-context-free-language" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. 上下文无关语言 (Context-Free-Language)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. 上下文无关语言 (Context-Free-Language)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basics
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cfg" class="md-nav__link">
+    <span class="md-ellipsis">
+      CFG的化简
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. 自上而下的语法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. 自上而下的语法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      预测分析法
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="预测分析法">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      递归的
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#-" class="md-nav__link">
+    <span class="md-ellipsis">
+      非递归的 -- 下推自动机
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-pda" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. 下推自动机 PDA
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. 下推自动机 PDA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      定理
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. 自下而上语法分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. 自下而上语法分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      回归课本
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="回归课本">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#84" class="md-nav__link">
+    <span class="md-ellipsis">
+      例8.4
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. 语义分析
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. 语义分析">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      符号表
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      属性文法
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      语法制导的属性求值
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="语法制导的属性求值">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lr" class="md-nav__link">
+    <span class="md-ellipsis">
+      LR制导的属性求职过程
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      程序声明的语义分析
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      题型
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#93" class="md-nav__link">
+    <span class="md-ellipsis">
+      习题9.3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. 中间代码生成
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. 中间代码生成">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basics_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basics: 中间代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点1：将高级语言语句翻译成三地址代码段
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="考点1：将高级语言语句翻译成三地址代码段">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#11" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.1 翻译简单变量算数表达式赋值语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#12" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.2 翻译下标变量算数表达式赋值语句
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#13" class="md-nav__link">
+    <span class="md-ellipsis">
+      1.3 布尔表达式与控制语句
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点2：对于给定代码段，给出带注释语法树作为翻译过程和结果的解释
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3for" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点3：给一个文法，设计一个属性文法将for翻译为三地址代码
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      考点4：采用全局名的翻译样例
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      11. 运行时环境
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="_1">形式语言与编译<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h1>
+<h2 id="recource">Recource<a class="headerlink" href="#recource" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://pku-minic.github.io/online-doc/#/">PKU: 编译原理实践</a></li>
+<li><a href="https://www.bilibili.com/video/BV1dL4y1H7T8?spm_id_from=333.788.player.switch&amp;vd_source=40cd9a3bec0b58d41925ce062c421cde&amp;p=21">哈工-编译原理公开课</a></li>
+<li><a href="https://xjtu.app/t/topic/12940">交大门：往年题回忆</a></li>
+</ul>
+<h2 id="grade">Grade<a class="headerlink" href="#grade" title="Permanent link">&para;</a></h2>
+<p>平时30%
+期末70%</p>
+<hr />
+<h2 id="1">1. 绪论<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p><strong>这一章适合学完回来看</strong></p>
+<p><strong>前端+中间表示+后端</strong>
+前端：对源代码进行分析，输出<em>中间表示形式</em>
+后端：输入<em>中间表示形式</em>，进行<em>代码优化</em> 和 <em>目标代码生成</em></p>
+<p><strong>编译的过程划分</strong>
+1. 词法分析
+2. 语法分析
+3. 语义分析, 这前三步属于前端
+4. 代码优化
+5. 目标代码生成</p>
+<h2 id="2-fa">2. 有穷自动机(FA)<a class="headerlink" href="#2-fa" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><em>Finite Automata, FA, 有穷自动机</em></p>
+</blockquote>
+<p>分为2类：DFA(确定型有穷自动机)，NFA(不确定型有穷自动机), 其中NFA还有变种<span class="arithmatex">\(\epsilon-NFA\)</span></p>
+<p>接下来就是依次介绍这几种自动机</p>
+<h3 id="dfa">DFA<a class="headerlink" href="#dfa" title="Permanent link">&para;</a></h3>
+<p>$$
+\begin{array}{l}
+{Q,\Sigma,v,q_0,F}
+\end{array}
+$$
+分别表示：状态集，输入符号集(字母表)，转移函数，初始状态，可接受状态集</p>
+<ul>
+<li><strong>扩展转移函数</strong>：就是原来的转移函数参数为一个状态+一个输入符，扩展为接受一个状态+一个输入符号串, <span class="arithmatex">\(\tilde{v}\)</span></li>
+<li><strong>DFA的语言</strong>: 一个输入符号串能让DFA走到可接受状态，就是DFA的语言，<em>所以这么看DFA其实就是用来规定一定规律的字符串的，比如以11为前缀的串，这样的DFA很好设计</em></li>
+</ul>
+<p><strong>Quiz</strong>
+- <span class="arithmatex">\(Q\cap\Sigma\)</span>=__
+- <span class="arithmatex">\(F\_Q\)</span></p>
+<h4 id="_2">表示形式<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>状态转换图：<ul>
+<li>接受状态画双圈</li>
+<li>初始状态有一条没有出发节点和边权的边指向</li>
+</ul>
+</li>
+<li>状态转移表<ul>
+<li>接受状态前面带<code>*</code></li>
+</ul>
+</li>
+<li>记号<ul>
+<li>L(A): A的语言</li>
+<li>{0,1}*: 任意由01组成的串
+直观来说，一个转移函数如下的DFA：</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>0</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="arithmatex">\(\rightarrow q_\epsilon\)</span></td>
+<td><span class="arithmatex">\(\perp\)</span></td>
+<td>q1</td>
+</tr>
+<tr>
+<td>q1</td>
+<td><span class="arithmatex">\(\perp\)</span></td>
+<td>q11</td>
+</tr>
+<tr>
+<td>*q11</td>
+<td>q11</td>
+<td>q11</td>
+</tr>
+</tbody>
+</table>
+<p>尝试推一下会发现只有输入串前缀为11的时候能走到接受状态q11，这就是该DFA的语言</p>
+<h3 id="nfa">NFA<a class="headerlink" href="#nfa" title="Permanent link">&para;</a></h3>
+<p>对DFA，当确定一个状态+一个输入符号时，下一个状态是确定的。如果下一个状态不再确定，而是一个集合就是NFA</p>
+<p>直观来说，就是状态转换图一个节点可以有几条出边的权相同了，那么对于一个输入串，在这个状态转移图上的状态转移路径就不再唯一，其中只要有一条路径能走到最终接受状态，就表示可以被接受，这种路径分叉的感觉，书上称之为<em>尝试</em></p>
+<p>概念
+- <strong>线索</strong>：对于一个输入串，NFA每一条可能的状态转移路径，就是线索</p>
+<h3 id="epsilon-nfa"><span class="arithmatex">\(\epsilon -NFA\)</span><a class="headerlink" href="#epsilon-nfa" title="Permanent link">&para;</a></h3>
+<p>当一个状态甚至可以不消耗输入符号就转移到另一个状态的时候，就是<span class="arithmatex">\(\epsilon-NFA\)</span>。<em>有一个明显的作用，如果构造一个初始状态q0，q0可以<span class="arithmatex">\(\epsilon\)</span>转移到几个DFA的初始状态，就可以直接将几个DFA融合到一起</em>(相当于每一个输入串都会试图走各个DFA的线索看接不接受)</p>
+<p>概念：
+- <strong><span class="arithmatex">\(\epsilon\)</span>闭包</strong>: 一个状态仅靠<span class="arithmatex">\(\epsilon\)</span>转移就可以抵达的状态集合/一个状态集合中各个状态的<span class="arithmatex">\(\epsilon\)</span>闭包并集</p>
+<h3 id="_3">考试题型<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<h4 id="_4">画状态转移图<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h4>
+<h4 id="dfa_1">归纳法证明/描述DFA的语言<a class="headerlink" href="#dfa_1" title="Permanent link">&para;</a></h4>
+<h4 id="nfa-dfa">NFA-&gt;DFA<a class="headerlink" href="#nfa-dfa" title="Permanent link">&para;</a></h4>
+<p>总体思路就是将NFA中状态的集合作为DFA的一个状态，<strong>可以形象的理解为可能的状态集合</strong>。这样NFA就可以转换为DFA</p>
+<p>具体来说，将{q0}作为初始状态，那么q0通过各输入符号能到达每一个状态集合也是新DFA的状态。对于NFA，每一个状态经过一个输入符号都可以到达一个状态集合，那么状态集合中的每一个元素经过同一个输入符号得到的各个状态集合的并集，就是一个状态集合经过一个输入符号所到达的新状态集合，将这两个状态集合作为两个状态，就可以转化成DFA中的一个状态到另一个状态的转移</p>
+<p>一行一行写转移状态表，得到的新状态作为下面的新行开头状态，直到写完即可</p>
+<h4 id="epsilon-nfa_1"><span class="arithmatex">\(\epsilon-NFA\)</span>简化<a class="headerlink" href="#epsilon-nfa_1" title="Permanent link">&para;</a></h4>
+<p>概念：
+- <strong>单一路径</strong>：除了始末节点，其他节点都只有单一的射入射出弧</p>
+<p>优化方法：
+1. 将<span class="arithmatex">\(\epsilon\)</span>弧组成的单一路径改为从出发节点直接到结束节点的<span class="arithmatex">\(\epsilon\)</span>弧
+2. 如果单一路径的末端没有射出弧，并且始末节点都是接受/非接受状态，结束节点就可以直接合并到出发节点
+3. 能<span class="arithmatex">\(\epsilon\)</span>转移到接受状态的所有状态都成为接受状态</p>
+<h4 id="epsilon-nfa-dfa"><span class="arithmatex">\(\epsilon-NFA\)</span> -&gt; DFA<a class="headerlink" href="#epsilon-nfa-dfa" title="Permanent link">&para;</a></h4>
+<p>与NFA转化DFA相比，只是每计算出一个状态集合，需要再求一次<span class="arithmatex">\(\epsilon\)</span>闭包而已，比如初始状态{q0}改成其<span class="arithmatex">\(\epsilon\)</span>闭包</p>
+<p>概念：
+- <strong>惰性求值技术</strong>：似乎就是指每次计算一行，只考虑当前计算出来的状态的转移函数（这样才不会有无用状态）</p>
+<h4 id="dfa_2">设计DFA<a class="headerlink" href="#dfa_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>朴素的，先把输入符号集合写出来</li>
+<li>推，每个状态有可能遇上哪些输入符，遇上之后是产生新的状态还是指向老状态</li>
+<li>tip：对于没有射出弧的接受状态，如果是很多条弧的终点，为了画图更好看，减少线之间的交叉，可以复制几份，编号不同但是实质相同，各个弧指向各自的终点，都是可接受状态</li>
+<li>tip：如果一个状态可能会有很多入边（即含义比较重要，可能是很多路径的中继，画到中间会好看一些）</li>
+<li>tip: 按照编号一个个画出边，不然容易遗漏, 或者做标记</li>
+</ul>
+<h2 id="3-re">3. 正则 RE<a class="headerlink" href="#3-re" title="Permanent link">&para;</a></h2>
+<p><em>和前面的DFA，NFA，<span class="arithmatex">\(\epsilon\)</span>-NFA都是等价的</em></p>
+<p><strong>DFA-&gt;RE</strong>
+类似动态规划的递推式？
+<span class="arithmatex">\(R_{ij}^{(k)}\)</span>: 从节点 i 转移到节点 j 的输入符号串组成的正则表达式，且路径上的每个节点编号&lt;=k
+<strong>NFA-&gt;RE</strong>
+- 状态消除法
+    1. NFA-&gt;g-NFA: 初始状态无射入的弧，结束状态唯一且无射出的弧（显然通过加<span class="arithmatex">\(\epsilon\)</span>弧就可以做到），例如3.2
+    2. 逐步消除中间状态（记为q），如果有射入射出弧，那么将这条路径转化为一个权为正则表达式的弧，直接从射入节点指向射出节点
+<strong>RE-&gt;<span class="arithmatex">\(\epsilon\)</span>-NFA</strong>
+对于每一个基本符号都转化为一条弧（直接路径），对于每一个运算符都转化为把已有的弧通过<span class="arithmatex">\(\epsilon\)</span>弧连接起来</p>
+<h3 id="_5">泵引理<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
+<p><em>RE的必要条件，用于证伪</em>
+一个RE，一定存在一个正整数n(可以看作RE对应的DFA的状态数量)，任何长度&gt;=n的串，可以看作三个部分，满足
+- 中间部分非空
+- 去掉后面部分，长度&lt;=n
+- 中间部分去掉/重复任意次后，仍然属于RE的语言
+<em>我的理解：简单来说，就是对于一个&gt;=n的串，前n项组成的前缀有一个可重复可去掉的子串</em></p>
+<h3 id="dfa_3">DFA最小化<a class="headerlink" href="#dfa_3" title="Permanent link">&para;</a></h3>
+<h4 id="_6">填表算法<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h4>
+<p>列为<code>Q[1:]</code>, 行为<code>Q[:-1]</code>, 形成一个下三角矩阵
+1. 首先，接受状态和其余状态是可区分的，做标记
+2. 一行一行，看通过同一个输入符号，一个状态对是否转移到了两个可区分状态上，是则标记
+3. 重复，直到只剩下几个没有被标记的时候，逐个查看
+4. 将等价的状态视作一个状态即可最小化</p>
+<h4 id="hopcroft">霍普克罗夫特(Hopcroft)<a class="headerlink" href="#hopcroft" title="Permanent link">&para;</a></h4>
+<p>概念：
+- 划分，划分块
+- 一致的划分块：对Q做划分，一个划分块中的每一个状态经过相同的输入符会转移到相同的新划分块
+- 一致的极大划分块：划分块之间不能一致，就是说不能有两个划分块合并之后还是一致的，此时各个一致划分块就是最大的</p>
+<p>算法
+1. 可接受/不可接受是最初的划分
+2. 写出当前各个状态经过各个输入符转移到的划分块，将本来在同一个划分块的总会转移到相同块的各个状态划到一起，不同的分开来（只分裂，不合并）
+3. 不断对当前各个不一致的划分块分裂，直到得到各个一致的最大划分块</p>
+<h3 id="_7">题型<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<ul>
+<li>描述/设计正则表达式<ul>
+<li>描述的时候，主要抓住不带<code>*</code>的部分，这表示必须有的部分</li>
+<li>设计的时候，可以尝试划分为简单部分的连接</li>
+</ul>
+</li>
+<li>DFA/NFA-&gt;RE<ul>
+<li>状态消除法，消除的节点有m个射入节点，n个射出节点，那么一般补mn个弧</li>
+</ul>
+</li>
+<li>证明不是正则语言<ul>
+<li>泵引理：就是先把n设出来，然后构造一个式子（一般是2n长的），证明他的前n项不存在可重复/可去掉的子串</li>
+</ul>
+</li>
+<li>DFA最小化</li>
+</ul>
+<h2 id="4">4. 词法分析<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p><em>从源程序（字符串）到(词法)记号串</em></p>
+<h3 id="concepts">Concepts<a class="headerlink" href="#concepts" title="Permanent link">&para;</a></h3>
+<ul>
+<li>词法单元：种属(词法类别)+个体，例如<code>&lt;NUM,100&gt;</code>, <code>&lt;WHILE,_&gt;</code><ul>
+<li>种属: 一个单词的种类，可以看作是一个正则语言(比如<code>整数</code>: <code>[+-]?[0-9]+)</code>, 程序中的词法单元有以下5个种属<ul>
+<li>关键字/保留字: if/else/for/...</li>
+<li>标识符: 程序中定义的变量、类型、常量等</li>
+<li>常数</li>
+<li>运算符</li>
+<li>分隔符: <code>,</code>, <code>;</code>, <code>()</code>...</li>
+</ul>
+</li>
+<li>个体：对于一个种属只有一个个体，记作<code>_</code>，否则记具体值比如<code>100</code>, </li>
+<li>词法记号：<code>(WHILE,_)</code>是<em>一符一种</em>，<code>(KEY,while)</code>是<em>全体一种</em></li>
+</ul>
+</li>
+</ul>
+<p><strong>书中提到的词法类别</strong>：
+<em>标识符</em>
+- ID: 定义和c类似，开头为字母，后面可以是字母/数字，并且不能和关键字重名，只是不包含<code>_</code>了
+<em>关键字/保留字</em>
+- KEY: 关键字/保留字，是使用<em>全体一种</em>时的种属
+- INT,FLOAT,VOID,IF,ELSE：关键字/保留字，是使用<em>一符一种</em>时的种属
+<em>常数</em>
+- NUM: NUMber
+- FLO: FLOat number
+<em>运算符</em>
+-  AOP: Arithmetic OPerator, <code>{+,-,*,/}</code>: <em>全体一种</em>
+    - ADD,SUB,MUL,DIV: <em>一符一种</em>
+- ROP: Relational OPerator, <code>{&lt;,&gt;,&lt;=,&gt;=,==,!=</code>
+- ASG: ASsiGnment, <code>{=}</code>
+- AAS: Add ASsignment, <code>{+=}</code>
+- AAA: Auto-Add Assignment, <code>{++}</code>
+- BOP: Bool OPrator, <span class="arithmatex">\(\{\lor,\land,!\}\)</span>
+- DLI: DeLImeter, <code>{(,),[,],\{,\},\,,;}</code>
+    - 分别对应LPA(Left Parentthesis),RPA,LBK(Left Bracket),RBK,LBR(Left Brace),RBR,CMA(Comma),SCO(Semicolon)</p>
+<h3 id="dfa_4">多语言联合DFA<a class="headerlink" href="#dfa_4" title="Permanent link">&para;</a></h3>
+<p>$$
+\sigma-DFA
+$$
+<em>POV</em>
+- 语言：是串的集合，这里每一种词法类别都是一种正则语言，也就是一种语言
+- DFA: DFA识别一种语言
+- 对于一个DFA，我们可以判断一个串 属于/不属于 这个DFA的语言，那么有几个DFA的时候，我们人工很容易就可以判断一个串到底属于哪一个DFA/不属于任何一个DFA，只要每个DFA都走一遍，看能不能接受就行
+- 为了避免有几个DFA都可以接受，就需要规定 <em>各DFA语言不相交</em>
+- 那么，对机器来说，就需要把几个识别不同语言的DFA联合到一起，使得对于一个可能属于若干种词法类别的串，可以自动判断他到底属于哪一种语言，重点在于<em>如何联合到一起</em>
+- 根据之前学过的 <span class="arithmatex">\(\epsilon-NFA\)</span>，显然只要在开头加上一个 <span class="arithmatex">\(\epsilon\)</span>转移，就可以合并为一个NFA，再转化为DFA就可以了，那么机器遍历各条线索，就可以判断出属于哪个DFA，即属于哪个语言
+- 这个时候，显然根据接受状态的不同就可以判断一个串属于哪种语言
+- 但是有个问题：对于一个串 <code>while1i++</code>，我识别出while以后，还要接着读入输入符，那么状态就会改变
+- 所以引入<em>回退</em>操作，只要while对应的接受状态没有以1为权的出边，<span class="arithmatex">\(\sigma-DFA\)</span>就会进入死亡状态，此时回退看上一步是不是走到接受状态就可以了
+- 为了表示串的结束，引入一个符号 <code>#</code>，放在串的末尾
+- 存在一种特殊情况，即一个语言本来是另一个语言的子集（比如 <em>关键字</em> 就是 <em>标识符</em>的子集），为了不相交将其从父集中挖掉，对于这种情况，子集者的 <em>优先级</em>较高，构建的时候先构建优先级高的FA，再构建优先级低的FA（比如说<em>标识符DFA</em>的可接受状态显然可以从<em>关键字DFA</em>的各可接受状态和中间状态转移得到，所以先构建<em>关键字DFA</em>会使得构建<em>标识符DFA</em>更简单）<em>图4-5是一个很好的例子</em>，于是按照构建FA的顺序就可以将原语言簇 <span class="arithmatex">\(\mathcal{L}\)</span>转化为一个有序语言簇 <span class="arithmatex">\(\mathbb{L}\)</span></p>
+<h3 id="concepts_1">Concepts<a class="headerlink" href="#concepts_1" title="Permanent link">&para;</a></h3>
+<p><strong>Definition</strong>
+对书上定义的<em>说人话</em>解释
+<em>对于定义4.1</em>，怎么解释都感觉这个定义很绕口
+- <em>路径</em>：即输入串，以q为终点就是输入后得到的最终状态为q
+- <em>L(q)</em>: 所有最终状态为可接受状态q的成功路径的集合，即输入串的集合，注意到语言也是输入串的集合，所以L(q)在这个<strong>判别输入串属于哪种语言的任务</strong>里， 就是指当DFA结束于q时，说明该串属于的语言，也就是说<strong>每一个可接受的状态q，都代表了一个语言，记为L(q)</strong>
+- <span class="arithmatex">\(\mathcal{L}\)</span>: 输入串集合的集合，可以看作就是语言的集合，所以叫语言簇，且要求<strong>各语言两两不相交</strong>
+所以定义简单来说就是：
+1. 一个二元组：DFA+语言簇（语言集合）
+2. 语言簇中的语言不相交，显然如果相交我们就不能判断相交的部分中的串属于哪一个语言了
+3. 每一个可接受状态所代表的语言一定是<span class="arithmatex">\(\mathcal{L}\)</span>中某一个语言的子集，<em>就是当走到一个接受状态的时候，要有一个语言与之对应，表示识别出了这个串是这个语言的</em>
+4. 每一个<span class="arithmatex">\(\mathcal{L}\)</span>中的语言，至少包含了一个可接受状态代表的语言，<em>其实就是要有语言对应的接受状态</em></p>
+<p><strong>定理4.1</strong>
+对可接受状态集，可以做一个划分，划分后的每个部分都可以对应<span class="arithmatex">\(\mathcal{L}(语言簇)\)</span>中的一个语言L
+- 对应一个语言，意味着这个部分里面的各个q所代表的语言并起来就是L
+- 也意味着划分数和语言簇上的语言数相同
+- <span class="arithmatex">\(\psi\)</span>: 一个满射(值域被覆盖): <span class="arithmatex">\(F\rightarrow \mathcal{L}\)</span>，表示的就是可接受状态q和其对应的语言之间的关系</p>
+<h3 id="tldr">TLDR<a class="headerlink" href="#tldr" title="Permanent link">&para;</a></h3>
+<ul>
+<li><span class="arithmatex">\(\sigma-DFA=(DFA\ A,\mathcal{L}), 语言簇\mathcal{L}不相交\)</span></li>
+<li>比DFA加上<em>回退</em>操作，使得可以连续识别一个串上各个词法单元，不会识别出一个词法单元后继续转移导致漏识别</li>
+<li><code>#</code>表示串结束</li>
+<li>一些书上的语言<ul>
+<li>udi: 无符号整数，其RE可以理解为: 不含前0的整数｜0</li>
+<li>tail：小数部分，其RE可以理解为：不含后0的整数</li>
+<li>udf：无符号浮点数，一定有一个<code>.</code>，两边至少有一边存在，前若存在为 <code>udi|0</code>(这个<code>|0</code>好像没有必要)，后若存在为 <code>tail|0</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="_8">题型<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<ul>
+<li>构建 <span class="arithmatex">\(\sigma-DFA\)</span><ol>
+<li>先按照一般的DFA设计方法设计试试，注意构建优先级，从优先级高的DFA到优先级低的DFA的转化。不行再试试下面的通法(感觉很麻烦)</li>
+<li>从不同的初始状态出发，得到各个语言的FA</li>
+<li>通过 <span class="arithmatex">\(\epsilon\)</span>转移集合成NFA</li>
+<li>NFA-&gt;DFA(状态集做状态)得到 <span class="arithmatex">\(\sigma-DFA\)</span></li>
+</ol>
+</li>
+<li><span class="arithmatex">\(\sigma-DFA\)</span>的工作过程<ul>
+<li>和普通DFA一样读入输入符，转移状态</li>
+<li>当读入一个输入符会导致死亡时，回退一步，回退后在可接受状态上，就将之前读入的串记为一个词法单元，然后回到初始状态，开始识别下一个词法单元，否则报错</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-context-free-language">5. 上下文无关语言 (Context-Free-Language)<a class="headerlink" href="#5-context-free-language" title="Permanent link">&para;</a></h2>
+<p><em>CFL和之前的DFA，NFA，RE等不再等价</em></p>
+<h3 id="basics">Basics<a class="headerlink" href="#basics" title="Permanent link">&para;</a></h3>
+<p><strong>Definition</strong>
+<span class="arithmatex">\((V(var),T(Terminate),P(Produce),S(Start))\)</span>
+- V: 变元集合
+- T：终结符集合，之所以称之为终结符是因为是语法树的叶子结点，即语法树终结于终结符
+- P：产生式，形如<code>S-&gt;1S</code>，由此可以推出该CFG(Context-Free-Grammer)的CFL
+- S：初始符号
+<strong>Concepts</strong>
+- 派生（书上是推导）：根据产生式左推右
+    - <em>每一个变元可以看作对应一个语言(就是这个变元所能推出终结符串的集合)，整个CFG定义的语言就是初始符号S对应的语言</em>
+- 规约：根据产生式右推左
+- 文法符号串，终结符串
+- 直接推导
+- 最左推导
+- 最右推导
+- 句型，句子: 推导中的每一步结果都是句型，得到的终结符串就是句子
+- 语法分析树
+- 歧义性：存在多个语法分析树对应相同的句子，<em>定理：等价于存在两个相同的最左推导</em>，这可能是文法导致的歧义也有可能是语言本身的固有歧义性，例如<span class="arithmatex">\(\{a^xb^yc^z|x=y \lor y=z\}\)</span>
+    - 文法导致的歧义：
+        - 左结合/右结合带来的歧义性, S-&gt;S+S|n文法显然对于1+2+3有两棵语法树，区别在于1+2/2+3谁是由一个S-&gt;S+S-&gt;n+n推导出来的结果，此时如果规定为左结合，那么右边的S应当先化为n，所以改成 <span class="arithmatex">\(S\rightarrow S+\dot{S}|\dot{S},\ \dot{S}\rightarrow n\)</span> 就可以解决结合性问题
+        - 运算优先级的歧义性：E-&gt;0|1|E+E|ExE, <code>1+2*3</code>显然语法树不唯一，为此<strong>需要给每个优先级安排一个变元</strong>，高优先级变元的产生式不能含有低优先级变元。（这样考虑，初始符号肯定代表最低优先级+，T代表高优先级x，然后低优先级应当能直接推出高优先级的变元，因为E要能推导出E+E+E+E...型的式子，而其中的每一项都有可能是高优先级式子，然后最高优先级应当是()包裹的任意式子｜立即数
+$$
+\begin{array}{l}
+E\rightarrow E+T|T \
+T\rightarrow T\times F | F\
+F\rightarrow (E)|d|i
+\end{array}
+$$
+        - 奇奇怪怪的歧义，比如习题5.6，<span class="arithmatex">\(S\rightarrow aS|aSbS|\epsilon\)</span>，aab有两个语法树
+            - 歧义在于一开始采用两个非空产生式的任意一个都可以推出开头为a，且中间含有b的串
+            - 思路：
+                - 先看他表示的语言：终结符只有ab两种，接受的语言是
+                    1. 可以为空
+                    2. 非空则开头为a
+                    3. S-&gt;aSbS说明，b总是跟在某个a后面，中间和后面可以再任意派生 or 为空
+                    4. 所以总结就是：任意前缀，a的数量&gt;=b的数量
+                    5. 想要消除歧义，考虑改造aS，让其表示只含a的式子，这样aSbS能否表示同时包含ab的所有式子呢，应当是可以的
+                    6. 于是得到
+$$
+\begin{array}{l}
+S\rightarrow a\dot{S}|aSbS|\epsilon\
+\dot{S}\rightarrow a\dot{S}|\epsilon
+\end{array}
+$$
+                - <strong>错误的</strong>参考答案是这样的：就是下一章对于回溯的修剪，但是这样只能得到LL(1)文法，而没有避免歧义
+$$
+\begin{array}{l}
+S\rightarrow aST|\epsilon\
+T\rightarrow bS | \epsilon
+\end{array}
+$$</p>
+<h3 id="cfg">CFG的化简<a class="headerlink" href="#cfg" title="Permanent link">&para;</a></h3>
+<ul>
+<li>产生的：可以推导出终结符串的变元</li>
+<li>
+<p>可达的：从最初开始，能推导出含有X的串（由变元和终结符组成）</p>
+</li>
+<li>
+<p>有用的：产生且可达的，<em>无用的即相反</em>
+<strong>化简的可靠顺序</strong>
+依次消除</p>
+</li>
+<li><span class="arithmatex">\(\epsilon-产生式\)</span>, 记为 <span class="arithmatex">\(\bar{e}\)</span><ul>
+<li>找出可空变元 <strong>直接产生<span class="arithmatex">\(\epsilon\)</span>的是可空变元，可以推导出<span class="arithmatex">\(\epsilon\)</span>的也是可空变元</strong></li>
+<li>将产生式右端的可空变元Xi改为 <code>Xi | Xi取空之后的表达式</code></li>
+</ul>
+</li>
+<li>单元产生式, 记做 <span class="arithmatex">\(\bar{u}\)</span><ul>
+<li>直接推导得到别的变元，改为直接推导到目标变元的直接推导结果</li>
+</ul>
+</li>
+<li>非产生的无用符号, 记做 <span class="arithmatex">\(g\)</span></li>
+<li>非可达的无用符号, 记做 <span class="arithmatex">\(a\)</span>
+所以一般记为：<span class="arithmatex">\(ag\bar{u}\bar{e}\cdot G\)</span>，放在后面的优先，右结合的</li>
+</ul>
+<p>下一章讲了更详细的修剪✂️</p>
+<h3 id="_9">题型<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<ul>
+<li>设计CFG<ul>
+<li>5.1(2)，设计非ww形式的串的语言：奇数很好设计，偶数设计：两个中间元素不同的奇串放在一起，两个中心就会变成两半对应位置的元素！！！</li>
+</ul>
+</li>
+<li>消除歧义性</li>
+<li>CFG文法化简,</li>
+<li>简单的证明？</li>
+</ul>
+<hr />
+<p>进入编译的领域
+<a href="https://www.bilibili.com/video/BV1dL4y1H7T8?spm_id_from=333.788.player.switch&amp;vd_source=40cd9a3bec0b58d41925ce062c421cde&amp;p=21">哈工大-编译原理公开课</a></p>
+<h2 id="6">6. 自上而下的语法分析<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p><em>课本居然被我扯下来一面，装订也是乱装订的嘛</em></p>
+<p>这一章和下一章讲的就是如何利用CFG对程序进行语法分析。</p>
+<p>所谓<em>语法分析</em>，可以看作就是给定一个输入串(源程序)和一个CFG，看这个输入串能否被CFG接受，和DFA是类似的。不过看DFA是否接受只要按照DFA的定义逐步推导就能得到确定的结果，CFG的推导却有很多不确定性，选取不同的候选式和推导顺序，可以产生很多不同的推导过程和推导结果，所以我们一般会确定使用<em>最左推导(对应自上而下的语法分析)</em>/<em>最右推导(对应自下而上的语法分析)</em>，但哪怕当确定最左/右推导后，因为每个变元有很多候选式，推导流程依然不固定。选取<em>最左推导</em>，然后如何进行语法分析，这就是这一章要就解决的问题</p>
+<p><strong>朴素的，可以利用回溯法进行语法分析</strong>
+<em>朴素的回溯算法</em>：最左推导会生成一个语法树，如果输入串能被推导出来，那么显然采用<em>深搜</em>的方法就可以搜索到<em>一个能推导出输入串的推导顺序</em>：如果将初始变元S看作根节点，将变元的各个候选式看作其各个子节点，这样得到的各个候选式子节点再采用其最左侧变元的各个候选式又会产生几个子节点，<em>于是推导的过程可以看作在语法树上进行搜索的过程</em>，当所有变元都变成终结符了就到了叶子节点，此时如果能匹配就成功，没能匹配就回溯。</p>
+<p>有两个问题：
+1. 回溯的方法效率很低
+2. 对于<em>左递归文法</em>，即形如<span class="arithmatex">\(S\rightarrow S\alpha|\beta\)</span>这样的式子，回溯法永远都不会停止</p>
+<p><strong>解决方法就是修剪文法得到 LL(1)文法</strong>
+课程中还提到了S,Q文法作为得到LL(1)的过程，可以了解一下</p>
+<p><em>几个概念需要记清楚</em>
+- SELECT集: 采用某个候选式的时候的当前终结符可以是什么
+- FOLLOW集：可能跟在某个变元后面的终结符的集合
+- FIRST集: 一个文法符号串的串首终结符集合。
+<span class="arithmatex">\(SELECT(A\rightarrow \epsilon)=FOLLOW(A)\)</span></p>
+<p><em>对于这几个概念，可以这么理解</em>
+假如推导到一半了，推导结果为<span class="arithmatex">\(\alpha ABC\)</span>, 输入串是<span class="arithmatex">\(\alpha b\gamma\)</span>，那么当前变元是A，当前终结符是<span class="arithmatex">\(b\)</span>，</p>
+<p>我们的目的是消除语法分析中的歧义性，当我们要推导A的时候，A如果存在多个产生式（候选式）<span class="arithmatex">\(A-&gt;a C|b C\)</span>，我们就可以根据当前终结符=a/b来判断应该使用哪一个而省去回溯搜索的精力，能做到这一点的这就是<em>预测分析器</em>，在这里显然很好确认，应当采用<span class="arithmatex">\(A-&gt;\beta C\)</span>，那么推广一下，对于一个产生式我们需要知道当前终结符为哪些的时候可以采用这个产生式，所以就有了SELECT集的概念：<em>即采用某个产生式的时候, 当前终结符可以是哪些，他们的集合就是SELECT集</em>，比如这里就是<span class="arithmatex">\(SELECT\{A-&gt;\beta C\}=\{\beta \}\)</span></p>
+<p><em>而FOLLOW集是相对于变元来说的</em>，就是说一个CFG中，初始符号推导所能得到的所有文法串中，某个变元A后面能跟哪些终结符，他们的集合就是FOLLOW集，对于文法串末尾的变元，则其FOLLOW集中加一个特殊终结符<code>$</code>(书上是<code>#</code>)</p>
+<p><em>FIRST集是相对文法符号串来说的</em>，是指一个文法符号串多能得到的所有终结符串中，每一个终结符串的首终结符组成的集合，<em>另外如果能推出<span class="arithmatex">\(\epsilon\)</span>，则它也算是FIRST集的一部分</em></p>
+<p><em>那么这几个概念有什么用处呢？</em>
+还是回到我们的目的--消除歧义，而消除歧义其实就是要做到<strong>一个变元的各个产生式，其SELECT集合不相交</strong>，这样就做到了只看当前终结符就能确定应该使用哪一个产生式，而这样的文法就是<strong>LL(1)</strong>的</p>
+<p>所以很好理解，对于<span class="arithmatex">\(A-&gt;\alpha\)</span>：
+- 当FIRST(<span class="arithmatex">\(\alpha\)</span>)不包含<span class="arithmatex">\(\epsilon\)</span>的时候，其一定能推出终结符串，<span class="arithmatex">\(SELECT(A-&gt;\alpha)=FIRST(\alpha)\)</span>
+- 反之，则可能推出空串，那么 <span class="arithmatex">\(\epsilon\in FIRST(\alpha),SELECT(A-&gt;\alpha)=(FIRST(\alpha)-\{\epsilon\})\cup FOLLOW\{A\}\)</span>(前者对应选择推出非空终结符串的情况，后者对应推空的情况，因为 <span class="arithmatex">\(\alpha\)</span>是文法符号串，所以两者均有可能)</p>
+<p><strong>LL(1)文法定义</strong> 书上没有SELECT集的定义
+那么一个LL(1)的文法，对于任何一个变元的各个候选式：<span class="arithmatex">\(A\rightarrow \alpha|\beta\)</span> 应当满足这样的条件：
+1. 不是左递归的，可以带<span class="arithmatex">\(\epsilon\)</span>
+2. 各个候选式FIRST集一定不相交，很好理解
+    1. 如果A不能推空，很直观，因为FIRST就是SELECT
+    2. 如果A能推空，此时有且仅有一个候选式可以推空(即FIRST集包含<span class="arithmatex">\(\epsilon\)</span>)，不然就无法唯一确定候选式，所以假如存在 <span class="arithmatex">\(A\rightarrow \epsilon\)</span>那么其他候选式的FIRST集必然不包含<span class="arithmatex">\(\epsilon\)</span>，或者如果一个候选式能推空，其他候选式一定不能推空
+3. 如果A能推空，那么A的FIRST集和FOLLOW集不相交
+    1. 很简单，我们要将A推空和A不推空的情况区分开来，FIRST集表示不推空，FOLLOW集表示推空。(FIRST(A)是各个候选式FIRST集的并，又因为各FIRST不相交，所以是各个FIRST的简单积累, 所以FIRST(A)和FOLLOW(A)不相交就意味着各个候选式的FIRST集也和FOLLOW(A)不相交，对于其中能推空的候选式，也是如此)
+        1. 会不会存在限制过强的问题，假如 <span class="arithmatex">\(\alpha\rightarrow a|\epsilon\)</span>，那么哪怕其FIRST集和FOLLOW(A)相交，此时也不会冲突，假如a为共同元素，当前终结符为a的时候这一步选择的候选式是确定的，肯定选 <span class="arithmatex">\(A\rightarrow \alpha\)</span>
+        2. 这意味着, <span class="arithmatex">\(\alpha\)</span>的第一个符号必然不是a，甚至其中必然不包含任何终结符（因为能推空），所以当前终结符不会改变，还是a
+        3. 这样一来就意味着，<span class="arithmatex">\(\alpha\)</span>能推出a开头的终结符串，而推空后当前文法串还是能匹配a。这显然是两颗语法树，在这里也直接对应了两个候选式
+        4. 所以<strong>对于是可空文法串，其SELECT集的两个部分FIRST集和FOLLOW集都一定不能相交(FOLLOW集中只会包含终结符#，而不会包含 <span class="arithmatex">\(\epsilon\)</span>)</strong>
+        5. 那么这和只检验SELECT集不相交是否等价呢？显然是等价的，因为对于可空文法串FIRST集和FOLLOW集相交的情况，此时SELECT集满足条件，但是之后的推导过程中一定会有一步SELECT集出现冲突，即出现一个候选式是推出相交终结符为首的终结符串，一个候选式能推空，这两个的SELECT集必然冲突</p>
+<h3 id="_10">题型<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p><strong>如何判定一个文法是不是LL(1)的，若不是则修剪</strong>
+0. 判断/消除左递归
+    - 左递归分为直接左递归/间接左递归，顾名思义
+    - 直接左递归很好消除：
+        - 就是引入一个新变元和<span class="arithmatex">\(\epsilon\)</span>，然后将左递推转化为右递归
+        - 记做 <span class="arithmatex">\(\bar{r}\)</span>
+    - 间接左递归(通用消除方法)：
+        - 给变元排个序，一般按照初始变元最后的顺序排
+        - 不断将前面的变元产生式往后面代入，如果能代入就得到新的产生式，从而将可能存在的间接左递归转化为直接左递归
+        - 消除产生的直接左递归
+        - 直到不再能更新
+        - 进行ag修剪(代入产生式很容易产生不可达变元)(不修剪空产生式&amp;单元产生式)
+        - 最后相当于得到了 <span class="arithmatex">\(ag\bar{r} \cdot G\)</span>作为结果文法
+1. 计算FIRST集
+- 候选式的FIRST集就是首文法符号的FIRST集，当首文法符号能推出<span class="arithmatex">\(\epsilon\)</span>的时候再加入下一个文法符号的FIRST集，终结符的FIRST集即为其本身，所以主要关注各个变元的FIRST集：
+    - 看各个产生式
+    - 产生式的FIRST集加入左元的FIRST集
+    - 重复更新直到不能再更新
+2. 根据FIRST集计算FOLLOW集
+    - <code>#</code>加入FOLLOW(S)
+    - 看各个产生式，从两个地方获取变元的FIRST集
+        1. 对产生式中的各个变元，变元后面的文法符号串不为空，则将变元后面的文法符号串的FIRST集加入FOLLOW（除 <span class="arithmatex">\(\epsilon\)</span>，其不属于任何FOLLOW集)
+        2. 若该变元后面的文法符号串可以推出 <span class="arithmatex">\(\epsilon\)</span>，则左元的FOLLOW加入该变元的FOLLOW
+3. 判断，根据定义
+4. 如何修剪
+书上称之为p修剪，包含
+- g：消除无产出变元, 即直接删去无产出变元和包含无产出变元的产生式
+- a：消除不可达变元, 即直接删除不可达的变元，终结符，和包含他们的产生式
+- <span class="arithmatex">\(\bar{e}\)</span>: 消除 <span class="arithmatex">\(\epsilon\)</span>产生式, 即删去产生<span class="arithmatex">\(\epsilon\)</span>的产生式【例如<span class="arithmatex">\(A\rightarrow \alpha|\epsilon\)</span> -&gt; <span class="arithmatex">\(A\rightarrow \alpha\)</span>】，并将给各个包含这个变元的产生式加上其为<span class="arithmatex">\(\epsilon\)</span>（即不包含这个变元）时的情况，【例如<span class="arithmatex">\(B\rightarrow BA\)</span> -&gt; <span class="arithmatex">\(B\rightarrow B|B\alpha\)</span>】
+- <span class="arithmatex">\(\bar{u}\)</span>: 消除单元产生式: 即将直接产生其他变元改为产生那个变元的各个产生式
+- <span class="arithmatex">\(\bar{r}\)</span>: 消除左递归, 方法为转化为右递归，<span class="arithmatex">\(A\rightarrow A\alpha|\beta\)</span> --&gt; <span class="arithmatex">\(A\rightarrow \beta\dot{A}, \dot{A}\rightarrow \alpha|\alpha \dot{A}\)</span>
+- <span class="arithmatex">\(\bar{c}\)</span>: 消除回溯, 这里应该是指解决公共前缀问题（只需引入一个新变元代替最大公共前缀后面的部分即可）, <span class="arithmatex">\(A\rightarrow \alpha C|\alpha D\)</span> --&gt; <span class="arithmatex">\(A\rightarrow \alpha\dot{A}, \dot{A}\rightarrow C|D\)</span>
+- <span class="arithmatex">\(\bar{a}\)</span>: 消除歧义性, 这里是说一个变元的候选式包含了其他变元的候选式？直接用被包含的变元替换即可了</p>
+<p>书上的例子采用了三条路线
+1. 划分子文法：大概就是某个子文法A可以单位产生别的子文法B里的变元，但是B的产生式不能再产生与A变元相关的串
+2. 对各个子文法的问题进行修剪
+3. 大致顺序为 <span class="arithmatex">\(\bar{a}\bar{c}\bar{r}a\bar{u}\)</span>, 不过书上最后一步消除歧义性很奇怪，只是存在重复的变元，似乎不会带来歧义性，而且这种方式也没有一般性
+<strong>老师说修剪出来就行</strong></p>
+<h3 id="_11">预测分析法<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<h4 id="_12">递归的<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h4>
+<ul>
+<li>每个变元可视为一个函数</li>
+<li>这个函数根据当前终结符选择产生式，再调用下一级的变元</li>
+</ul>
+<h4 id="-">非递归的 -- 下推自动机<a class="headerlink" href="#-" title="Permanent link">&para;</a></h4>
+<ul>
+<li>构建<em>预测分析表</em></li>
+<li>使用栈实现非递归，从只有初始元素<code>#</code>开始</li>
+<li>不断出栈-&gt;根据预测分析表选择产生式-&gt;入栈</li>
+<li>如果栈顶是一个终结符，与当前终结符匹配，则出栈并取下一个终结符</li>
+</ul>
+<h2 id="7-pda">7. 下推自动机 PDA<a class="headerlink" href="#7-pda" title="Permanent link">&para;</a></h2>
+<p><strong>定义</strong>
+PDA就是带栈的FA，可以是NFA/DFA</p>
+<p><strong>定义</strong>
+相比于FA
+- 多了关于栈的符号集 <span class="arithmatex">\(\Gamma\)</span>、初始符号 <span class="arithmatex">\(Z_0\)</span>
+- 转移函数多了栈操作作为输入输出的一部分, <span class="arithmatex">\(\delta\)</span></p>
+<p><strong>概念</strong>
+- 瞬时描述ID: (当前状态，剩余串，栈内容)
+- 直接移动: <strong>注意移动的符号，侧躺的T</strong>
+- 移动线索：对于一个确定的PDA和一个时刻的ID，显然可以推出其各条线索，查看是不是结束于<strong>可接受ID</strong>
+- 关于PDA的接受，有两种方式
+    - 以终结状态接受，类似FA，有一个/多个可接受状态f，能推出 <span class="arithmatex">\((f,\epsilon,\forall\alpha)\)</span>则为接受
+    - 以空栈接受，状态不重要，输入串和栈内容同时空了就接受了
+    - <strong>显然这两种定义等价，并且可以很容易的互相转化</strong>
+        - 加一个初始/结束状态
+        - 在之前的基础上加一个栈初始符号
+        - 然后对于需要的状态加转移就行</p>
+<p><strong>确定性PDA</strong>就是对于确定的（当前状态，当前终结符，当前栈顶元素），有确定的移动状态
+ppt定义, 对于任何一个状态q
+- 如果没有不消耗任何符号的转移
+    1. 如果q能消耗输入符号x和栈符号y转移，那么该转移唯一，并且也不能仅消耗x或仅消耗y转移，也就是说根据当前符号有唯一的转移，根据当前栈顶也有唯一的转移。
+    2. 如果q能消耗输入符号x而不消耗栈符号转移，那么该转移唯一，并且不能再有消耗x和某个栈符号的转移
+    3. 如果q能消耗栈符号y而不消耗输入符号转移，那么该转移唯一，并且不能再有消耗y和某个输入符号的转移
+    4. <strong>总结，就是对于任何一个状态，给定一个输入符号/栈符号都有唯一确定的转移，而不需要都给定</strong>
+- 如果有不消耗任何符号的转移，则不再有其他转移，且该转移唯一
+<strong>这样才能保证唯一确定, 不需要回溯搜索</strong></p>
+<h3 id="_13">定理<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<ul>
+<li>DPDA的语言包含正则语言，包含于CFL</li>
+<li>DPDA以终结方式接受的语言没有固有歧义性</li>
+<li>任意一个DPDA，总存在一个无歧义的CFG </li>
+</ul>
+<h3 id="_14">题型<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<ul>
+<li>给PDA，串，写线索</li>
+<li>设计PDA，两种接受方式</li>
+<li>判断PDA确定性</li>
+</ul>
+<h2 id="8">8. 自下而上语法分析<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<p>就是与自上而下的语法分析相反，通过最右推导的逆过程<em>最左规约</em>将输入串规约成初始状态</p>
+<p><strong>一个形象的流程是：</strong> 不断将最左侧的终结符入栈，然后检测当前栈顶若干项是否构成某个产生式的右部，构成则进行规约，称之为<em>移入-规约语法分析器</em>, 书上的表8-1是一个很清楚的示例</p>
+<p><strong>同自上而下一样，存在歧义性的问题</strong>：自上而下是FIRST集不同时产生歧义，自下而上则是当多个产生式有相同后缀的时候会发生歧义</p>
+<p><strong>于是引入了LR分析法</strong>： 
+<em>LR相比LL对文法的要求更低，接受的文法范围更广，并且避免了复杂化修剪</em>
+- LR(k)分析: 对输入从左(L)到右扫描，反向推导出一个最右(R)推导序列，并且需要向前查看k个输入符号的LR分析</p>
+<p><strong>一个LR分析的流程是这样的</strong>：根据ACTION和GOTO函数，不断的读入输入串，改变状态，进行规约，详细的阐释需要先说明几个概念
+- 状态：后面才说具体含义，这里可以理解为LR分析也可以看作使用一个下推自动机去读取输入串，这里的状态就是自动机的状态
+- 栈：类似于下推自动机的栈，只不过PDA的栈存的是推导中间结果，这里的栈存的是规约的中间结果。且入栈的每一个终结符/变元都绑定着一个状态，一起出栈入栈。（或者也可以看作有两个栈：一个是已读入/已规约的文法符号的栈，一个是状态栈，这两个栈的元素是一一对应的，永远都要一起入栈出栈）
+- ACTION函数：根据当前状态和读入终结符，判断此时是 
+    1. 终结符入栈并入栈状态x(sx)
+    2. 将栈顶若干个元素使用第x个产生式进行规约(rx)，状态栈顶状态出栈，再根据GOTO函数确定新状态入栈
+- GOTO函数：在进行规约后，栈顶将会是一个变元，并且历史状态将会来到栈顶和栈顶变元给出此时是什么状态</p>
+<p>一个形象的分析过程(对于给定的ACTION和GOTO)：</p>
+<table>
+<thead>
+<tr>
+<th>依据</th>
+<th>栈</th>
+<th>剩余输入</th>
+<th>状态栈</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始状态0</td>
+<td>$</td>
+<td>bab$</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>ACTION(0,b)=s4</td>
+<td>$b</td>
+<td>ab$</td>
+<td>$04</td>
+</tr>
+<tr>
+<td>ACTION(4,a)=r3(B-&gt;b), GOTO(0,B)=2</td>
+<td>$B</td>
+<td>ab$</td>
+<td>$02</td>
+</tr>
+<tr>
+<td>ACTION(2,a)=s3</td>
+<td>$Ba</td>
+<td>ab$</td>
+<td>$023</td>
+</tr>
+<tr>
+<td>ACTION(3,b)=s4</td>
+<td>$Bab</td>
+<td>b$</td>
+<td>$0234</td>
+</tr>
+<tr>
+<td>ACTION(4,b)=r3, GOTO(3,B)=6</td>
+<td>$BaB</td>
+<td>b$</td>
+<td>$0236</td>
+</tr>
+<tr>
+<td>ACTION(6,b)=r2(B-&gt;aB), GOTO(2,B)=5</td>
+<td>$BB</td>
+<td>b$</td>
+<td>$025</td>
+</tr>
+<tr>
+<td>ACTION(5,b)=r1(S-&gt;BB), GOTO(0,S)=1</td>
+<td>$S</td>
+<td>$</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>ACTION(1,$)=acc</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><em>LR(0)分析框架</em>
+- 项目: <span class="arithmatex">\(A-&gt;\alpha \cdot a \beta\)</span>, 可以理解为<em>正在尝试匹配 <span class="arithmatex">\(A-&gt;\alpha a \beta\)</span>这个产生式，并且正在等待a</em>
+    - 移进项目，待约项目，规约项目(完全项目)，后继项目
+- 增广文法: 加一个 <span class="arithmatex">\(S'-&gt;S\)</span>, 确保初始状态只有一个产生式
+理论上可以将每一个项目看作一个状态，但是这样会有许多冗余的状态(<em>就是课本上的itemNFA</em>)，显然存在许多等价的状态，<em>将各个等价的状态组成的闭包作为一个状态</em>，这里的<em>等价</em>可以理解为遇到相同的输入符号时会转移到相同的下一个状态，<em>计算上</em>就是对于项目：<span class="arithmatex">\(A-&gt;\alpha \cdot B \beta\)</span>将<span class="arithmatex">\(B-&gt;\cdot \gamma\)</span>作为其等价项目，并类推出其他等价项目(<em>这就是课本上的itemDPDA</em>)</p>
+<blockquote>
+<p>LR(0)分析表计算
+<img alt="img" src="/imgs/compile/LR(0)分析表计算.png" /></p>
+</blockquote>
+<p>根据状态转移图构建分析表的方式如下：
+- 根据终结符转移状态, 则为ACTION项
+- 根据变元转移状态, 则为GOTO项, 或者也可以看作都是GOTO的元素，只是将其中根据终结符转移的部分复制到了ACTION中
+- 最后为项目集<span class="arithmatex">\(\{S'-&gt;S\cdot\}\)</span>加上代表成功的ACTION(I,$)=acc</p>
+<ul>
+<li>对于待约项目，ACTION结果为s</li>
+<li>对于规约项目，ACTION结果为r</li>
+</ul>
+<p><em>冲突</em>
+- 移进/规约 冲突: 当一个项目闭包中有以下两者时，若遇到当前输入终结符为a，则两条产生式均可以选择，发生冲突。<em>若要不发生冲突，则需要B的FOLLOW集中没有a</em>
+    - <span class="arithmatex">\(A-&gt;\alpha \cdot a\beta\)</span>
+    - <span class="arithmatex">\(B-&gt;\gamma \cdot\)</span>
+- 规约/规约 冲突: 类似前面，<em>此时解决冲突需要B1，B2的FOLLOW集不相交</em>
+    - <span class="arithmatex">\(B1-&gt;\alpha\cdot\)</span>
+    - <span class="arithmatex">\(B2-&gt;\gamma \cdot\)</span>
+当没有这两种情况时，就可以采用SLR分析法，建立SLR分析表</p>
+<p><em>SLR(1)分析框架</em>
+- 和LR分析法的区别就在于建立分析表的过程中，如果ACTION的结果为r，还需要考虑FOLLOW集的约束
+- 当SLR(1)的冲突消解规则消解不了 归约/移进冲突时，考虑通过定义先后顺序来消解：1）先规约表示左结合，2）先移进表示右结合
+- 书上使用SLR进行语法分析时，似乎可以容忍左递归的语法, 并且由例8.4似乎可以接受 <span class="arithmatex">\(\epsilon\)</span>表达式</p>
+<p><em>LR(1)分析法</em>
+<em>这个课本上好像没有</em>
+SLR只考虑规约的时候，当前输入终结符应当属于规约变元的FOLLOW集，而LR(1)在此基础上，提出对于不同的位置，采取同一个规约项目应当有不同的FOLLOW集，于是根据不同位置采用规约项目时不同的FOLLOW集又可以分裂出许多新的状态，相关概念修改为：
+- 项目：<span class="arithmatex">\(A-&gt;\alpha\cdot a\beta,b\)</span>（加上了一个b表示应当跟在A后面的终结符，是A FOLLOW集的元素/子集）,可选的b的集合是这个项目的<em>展望集</em>，<em>展望集</em>对于移进项目/待约项目在设计ACTION表/GOTO表的时候无需考虑
+- 对于规约项目 <span class="arithmatex">\(A-&gt;\alpha a\beta\cdot,b\)</span> 则只有当前输入终结符为b时才能采用该规约
+- 于是等价项目的推导方式为：
+    - 对于 <span class="arithmatex">\(A-&gt;\alpha\cdot B\beta,a\)</span> 其等价项目为 <span class="arithmatex">\(B-&gt;\cdot\gamma,b\)</span> 而 <span class="arithmatex">\(b\in FIRST(\beta a)\)</span> 
+    - 于是等价项目可以看作是一个待约项目/移进项目的子移进项目，即想要将某个移进项目转化成待约项目进而转化成规约项目时可能需要先进行的移进项目
+    - 形象的理解，如果想要一步步将该<span class="arithmatex">\(A-&gt;\alpha\cdot B\beta,a\)</span>转移到规约项目并规约，应当先通过<span class="arithmatex">\(B-&gt;\cdot\gamma,b\)</span>规约出一个B来，所以前一个产生式决定了采取后一个产生式时规约得到B的位置，也就决定了后一个产生式的规约项目<span class="arithmatex">\(B-&gt;\gamma\cdot,b\)</span>的展望集 <span class="arithmatex">\(FIRST(\beta a)\)</span></p>
+<h3 id="_15">回归课本<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>概念：</p>
+<ul>
+<li>最左规约：每次选取最左边的可规约串进行规约，其实就是LR在做的事情</li>
+<li>规范推导：最右推导</li>
+<li>规范句型：规范推导/规范规约得到的句型</li>
+<li>规范规约：规范推导的逆，也是最左规约(最左规约不一定是规范规约，也就不一定是最右推导的逆)，<em>注意规范规约特有的箭头</em></li>
+<li>短语：一个句型 <span class="arithmatex">\(\alpha\beta\delta\)</span> 中的一个子串 <span class="arithmatex">\(\beta\)</span>，可经过至少一步规约到某个变元A，就说这个子串 <span class="arithmatex">\(\beta\)</span>是该句型相对于A的短语</li>
+<li>直接短语：A直接推导出 <span class="arithmatex">\(\beta\)</span>的时候</li>
+<li>句柄： 假如有规范句型<span class="arithmatex">\(\sigma Ax\xRightarrow*_{rm} \sigma\gamma x\)</span>(左式为规范句型，说明按照规范规约我们一定会规约到右式，从而进一步规约到左式) , 在这一步规范规约中<span class="arithmatex">\(\gamma\)</span>就是句柄，可以理解为规范规约过程中，某一步的最左可规约串就是句柄, <em>规范规约是规约句柄的最左规约，规范规约每一步规约的就是句柄</em></li>
+<li>最大活前缀：规范句型后缀是句柄的前缀，<em>说人话就是到句柄为止的前缀</em>（包含句柄）</li>
+<li>活前缀：最大活前缀的前缀(p)<ul>
+<li>所以，SRF分析的时候，栈里的就是活前缀，当栈里的是一个最大活前缀的时候，就说明有规约项目(完全项目)了</li>
+</ul>
+</li>
+<li>文法项目：<span class="arithmatex">\(e=(A,\alpha,\beta),即e=A\rightarrow \alpha\cdot \beta\)</span></li>
+<li>文法项目集：itemset</li>
+<li>可用项目: 一个活前缀的可用项目，可以看作就是当前活前缀有可能规约的所有产生式对应该活前缀的项目（不看后面，只看已经移进的部分被活前缀包含了）</li>
+<li>有效项目：考虑后面，确实能用该项目做规约，并且是规范规约，就说这个项目是有效项目</li>
+<li>itemNFA：将项目集作为状态集，那么显然是一个NFA</li>
+<li>itemDFA：如前面所得到的项目集作为一个状态，树上好像没有提等价项目的概念</li>
+</ul>
+<h4 id="84">例8.4<a class="headerlink" href="#84" title="Permanent link">&para;</a></h4>
+<table>
+<thead>
+<tr>
+<th>剩余串</th>
+<th>符号栈</th>
+<th>状态栈</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>(())()</td>
+<td>$</td>
+<td>1</td>
+<td>shift</td>
+</tr>
+<tr>
+<td>())()</td>
+<td>$(</td>
+<td>14</td>
+<td>shift</td>
+</tr>
+<tr>
+<td>))()</td>
+<td>$((</td>
+<td>144</td>
+<td>shift</td>
+</tr>
+<tr>
+<td>))()</td>
+<td>$((S</td>
+<td>1445</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow \epsilon\)</span>),GOTO(5)</td>
+</tr>
+<tr>
+<td>)()</td>
+<td>$((S)</td>
+<td>14456</td>
+<td>shift</td>
+</tr>
+<tr>
+<td>)()</td>
+<td>$(S</td>
+<td>145</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow (S)\)</span>), GOTO(5)</td>
+</tr>
+<tr>
+<td>()</td>
+<td>$(S)</td>
+<td>1456</td>
+<td>shfit</td>
+</tr>
+<tr>
+<td>()</td>
+<td>$S</td>
+<td>12</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow (S)\)</span>), GOTO(2)</td>
+</tr>
+<tr>
+<td>)</td>
+<td>$S(</td>
+<td>124</td>
+<td>shift</td>
+</tr>
+<tr>
+<td>)</td>
+<td>$S(S</td>
+<td>1245</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow \epsilon\)</span>),GOTO(5)</td>
+</tr>
+<tr>
+<td></td>
+<td>$S(S)</td>
+<td>12456</td>
+<td>shift</td>
+</tr>
+<tr>
+<td></td>
+<td>$SS</td>
+<td>123</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow (S)\)</span>), GOTO(3)</td>
+</tr>
+<tr>
+<td></td>
+<td>$S</td>
+<td>12</td>
+<td>reduce(<span class="arithmatex">\(S\rightarrow SS\cdot\)</span>), GOTO(2)</td>
+</tr>
+<tr>
+<td></td>
+<td>$S'</td>
+<td>acc</td>
+<td>reduce(<span class="arithmatex">\(S'\rightarrow S\cdot\)</span>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_16">题型<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<ul>
+<li>判断规范句型</li>
+<li>写短语、直接短语、句柄</li>
+<li>证明SLR(1), LR(0)</li>
+</ul>
+<h2 id="9">9. 语义分析<a class="headerlink" href="#9" title="Permanent link">&para;</a></h2>
+<p><em>这一节似乎找不到相应的网课，只能硬啃，不过感觉这一章更讲人话了</em>
+网上类似的资源关键词：<em>语法制导的语义分析</em></p>
+<p><strong>术语表</strong>
+- CFG G: <span class="arithmatex">\((\mathbb{V},T,\mathcal{P},S)\)</span>, 上下文无关语法
+- att(G): CFG拓展成的属性文法，即给每一个产生式加上了一个<em>属性方程</em>
+- 属性方程：描述左右元的属性之间的关系的方程
+- 综合属性：属性方程依赖于自身及子节点
+- 继承属性：在属性方程中依赖于自身、父节点、兄长节点(即在产生式中的出现顺序早于其节点的节点)</p>
+<p>书上的例子9.3-5都挺好的</p>
+<p><strong>如何阅读属性文法</strong>
+- 从右向左看，即从规约的角度看
+- 属性方程其实就是赋值语句，是右求左
+- 所以属性文法其实就是一般的CFG在规范规约（自下而上语法分析）过程中顺带调用各个产生式的属性方程，自下而上的求出各个变元的属性值/利用属性方程中函数的副作用产生一些效果【例如例9.5的计算器的display()】</p>
+<h3 id="_17">符号表<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>template: </p>
+<pre><code>func_name@table: (outer:outer_func_name@table
+width:    argc:    arglist:    rtype:    level:    code:[]
+entry:(name:    type:    offset:    )
+entry:...
+)
+</code></pre>
+<ul>
+<li>其中函数的level从1开始(最外层为0)</li>
+<li>entry.offset似乎是结束地址？说11章细说</li>
+<li>最外层符号表的func_name为空</li>
+<li>数组entry参数：<code>name,type,offset,dims,dim[0-dims-1],etype</code></li>
+<li>func entry args: <code>name, type, offset, mytab</code>, size=8</li>
+<li>作为函数形参的变量的类型<ul>
+<li>数组：<code>ARRPTT</code>, size=4</li>
+<li>函数：<code>name, tyep:FUNPTT, offset:_+8, rtype</code>, size=8</li>
+</ul>
+</li>
+<li>一个函数声明/定义，有mytab，没有rtype，而作为函数形参的函数，没有mytab，有rtype</li>
+</ul>
+<pre><code>@table: (outer:NIL
+...)
+</code></pre>
+<h3 id="_18">属性文法<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<h3 id="_19">语法制导的属性求值<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>本章的目的就是在语法分析的过程中顺带把语义分析给完成，所以是基于LL(1)/LR分析框架下的</p>
+<p><strong>基于LL(1)的称之为LL制导的属性求值</strong>
+书上没讲，判定为不考，不过记个概念：
+<em>L属性文法</em>：每个产生式中的各个变元，其属性方程都只依赖于前面的变元
+<em>LL属性文法</em>：L属性文法+基础文法为LL(1)文法</p>
+<p><strong>基于LR的称之为LR制导的属性求值</strong>
+要求：没有继承属性，只有综合属性（但是看例子好像只依赖兄长的继承属性也可以，或者说副作用涉及到了兄长属性没关系？）</p>
+<p>书上提到了关于变量、函数、数组等的声明，但好像都比较泛泛而谈，不知道咋考</p>
+<h4 id="lr">LR制导的属性求职过程<a class="headerlink" href="#lr" title="Permanent link">&para;</a></h4>
+<p>从LR的 符号栈 &amp; 状态栈扩充了任意个<em>属性栈</em>，即每个属性一个栈，还是和符号栈一一对应，没有该属性的记做 <code>-</code>，<em>表9.1不错</em></p>
+<h3 id="_20">程序声明的语义分析<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<h3 id="_21">题型<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>题目出了两道：
+1. 给定 <span class="arithmatex">\(G_{(e)}\)</span>写出 <span class="arithmatex">\(att(G_{(e)})\)</span>，而且就是写书上讲的挺详细的括号匹配；然后写出具体输入串的 <em>带注释语法树</em> 和 <em>语法制导的属性求值过程</em>; 至于归纳对应关系这个不太了解了
+    1. 带注释语法树，就是在每个变元旁边标出求出的属性
+    2. 属性求值过程，还是SLR(1)分析框架，不过省去了构建等价项目集的过程，直接对原串开干。形式上还是写成一个表格，每一列分别是符号栈(开头是#), 属性栈，剩余串，动作(移进/rx+属性方程求解)，然后一行一行求解
+2. 利用主文法配套的属性文法，<em>翻译声明为符号表表示</em>，写出<em>翻译后的符号表的属性表表示</em></p>
+<h3 id="93">习题9.3<a class="headerlink" href="#93" title="Permanent link">&para;</a></h3>
+<p><strong>(1)</strong>
+$$
+int\ x;float\ b[3,6];int\ foo(int\ x){int\ y; \hat{S}};\hat{S}
+$$
+<strong>(2)</strong>
+$$
+int\ h(int\ f();int\ y;){int\ g(int\ c[];){\hat{S}};\hat{S}};\hat{S}
+$$</p>
+<h2 id="10">10. 中间代码生成<a class="headerlink" href="#10" title="Permanent link">&para;</a></h2>
+<p>讲的是要将高级语言代码翻译成<em>中间代码</em>，同语义分析，都是在语法分析的过程中进行翻译</p>
+<p>作业没布置四元式, 暂且跳过</p>
+<p>总的来说，是要将一个源程序规约成S，中间代码存放在S.code中</p>
+<h4 id="basics_1">Basics: 中间代码<a class="headerlink" href="#basics_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>赋值语句直接搬</li>
+<li>涉及运算一律转化为(临时)变量tx运算</li>
+<li>数组访问按照类型计算出偏移量再访问</li>
+<li>控制语句转化成<code>IF xxx THEN l1 ELSE l2</code> / <code>GOTO l3</code>这样的形式，介于汇编和高级语言之间</li>
+</ul>
+<h3 id="1_1">考点1：将高级语言语句翻译成三地址代码段<a class="headerlink" href="#1_1" title="Permanent link">&para;</a></h3>
+<h4 id="11">1.1 翻译简单变量算数表达式赋值语句<a class="headerlink" href="#11" title="Permanent link">&para;</a></h4>
+<p>可以分为两部分，一个是表达式的文法，一个是赋值的文法
+<strong>表达式文法</strong>
+$$
+E\rightarrow i|f|d|E\mathcal{o}E|\mathcal{u}E|(E)
+$$
+<strong>表达式文法的属性文法</strong>
+code属性：规约得到的E的对应的中间代码
+place属性：规约得到的E对应的结果变量名
+type属性：E对应的结果变量是INT/FLO</p>
+<p><strong>一个简单例子</strong>
+$$
+E\rightarrow i\quad{t=newvar();E.place=t;E.code=gen[?t=?getv(i)],E.type=INT}
+$$
+这里E代表由一个整数组成的表达式，假如其值为1，目前临时变量用到了t2, 将其归约为E后，其属性为<code>E.place=t2,E.code=[t2=1]</code>, 那么作为生成这一切的属性方程，显然我们需要先创建一个结果变量来存放这个整数<code>t=newvar()</code>, 于是自然结果变量<code>E.place=t</code>, 而对应的中间代码<code>t2=1</code>，其中的t2是t的实际变量名，1是i对应的结果，我们需要一个<code>gen[]</code>来做转换，<code>?t, ?getv(i)</code>理解为待转换为实际值</p>
+<p>可以想象剩下几个产生式的属性方程怎么写
+- E-&gt;d: 表示一个变量单独的表达式，x=getn(d)得到具体的变量名，<code>lookup(x)==UNBOUND</code>检查是否未定义，lookup(x,type)得到x的类型
+- E-&gt;EoE: <code>p=getn(o);E.code=E[1].place p E[2].place</code> 错误，应为 <code>p=getn(o);E.code=gen[?E[1].place?p?E[2].place];E[0].code=E[1].code++E[2].code++E[0].code</code></p>
+<p><strong>赋值文法</strong>
+$$
+S\rightarrow d=E
+$$
+这里S则只需要一个code属性，表示最终翻译为的中间代码，那就很简单了</p>
+<h4 id="12">1.2 翻译下标变量算数表达式赋值语句<a class="headerlink" href="#12" title="Permanent link">&para;</a></h4>
+<p><em>首先我们要知道如何通过多维下标 得到一维下标</em>: <code>int a[d1,d2,d3...dn], a[i1,i2,...in]-&gt;a[t],t=(((i1*d2)+i2)*d3+i3)*d4...</code></p>
+<p>从而，我们可以将所有的下标变量<code>a[2],a[1,2,3],...</code>均视为一维的，只需要将下标作为一个单独的变元<span class="arithmatex">\(\check{E}\)</span>, 并做处理即可</p>
+<p>对于<code>arr[i,j,k]</code>，我们要将其翻译为最终得到<code>t2=arr[t1]</code>类型式子的程度，其中t1是所需元素相对与arr起始地址的相对偏移量，是需要<span class="arithmatex">\(\times sizeof(type)\)</span>的, 所以逐步规约得到中间代码的过程其实就是逐步计算出t1的过程
+<em>写几个例子</em></p>
+<h4 id="13">1.3 布尔表达式与控制语句<a class="headerlink" href="#13" title="Permanent link">&para;</a></h4>
+<p><strong>布尔表达式 变元B</strong>
+- 属性tc：记录当这个表达式结果为真的时候应当转移到的标号LABEL(list)
+- 属性fc：记录当这个表达式结果为假的时候应当转移到的标号LABEL(list)
+- 属性code：这个表达式所翻译为的中间代码
+- 一般将B翻译为中间代码：<code>[......IF xxx THEN ?tc ELSE ?fc]</code>，虽然这里似乎默认布尔表达式被用于控制语句，所以直接翻译为控制语句的中间代码，但是只有IF THEN ELSE，具体标号该放在哪里的<code>LABEL xxx</code>语句由具体的控制语句<code>if()...else...</code>/<code>while()</code>生成
+<em>such as</em>: <code>B-&gt;a&lt;1 { B.tc=(ll1),B.fc=(lnl1),B.code=[t1=1;IF a&lt;t1 THEN ll1 ELSE lnl2] }</code></p>
+<p><strong>控制语句</strong>
+$$
+\begin{array}{l}
+&amp;S\rightarrow if(B)S\ else S\
+&amp;S\rightarrow if(B)S\
+&amp;S\rightarrow while(B)S
+\end{array}
+$$
+根据特点放置tc/fc并组织B.code，S.code即可了, 其中while语句还需要生成一个标号放在自己的代码前面，供转移</p>
+<p><em>另外，产生式中也可能有</em> <code>goto d</code>/<code>d:S</code>这样的式子，前者引用标号(可以先引用，后定义)，后者定义标号</p>
+<p><em>such as</em>
+$$
+\begin{array}{l}
+\
+&amp;S\rightarrow if(B)S\ else\ S \
+&amp;{ \
+&amp;\quad l=newl();\
+&amp;\quad S[0].code=B.code++genl[lABEL\ ?B.tc]++S[1].code++gen[GOTO\ ?l]\
+&amp;\quad\quad++genl[LABEL \ ?B.fc]++S[2].code++genl[LABEL\ ?l]\
+&amp;}
+\end{array}
+$$</p>
+<h3 id="2">考点2：对于给定代码段，给出带注释语法树作为翻译过程和结果的解释<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<ul>
+<li>记住几个变元，代码段S(code)，表达式E(place,code)，布尔表达式B(tc,fc,code)</li>
+<li>记录最新的 t, l</li>
+</ul>
+<h3 id="3for">考点3：给一个文法，设计一个属性文法将for翻译为三地址代码<a class="headerlink" href="#3for" title="Permanent link">&para;</a></h3>
+<p><em>10.3</em></p>
+<pre><code>S-&gt;for(S;B;S)S
+{
+    l=newl();
+    S.code=S[1].code++genl[LABEL l]++B.code++genl[LABEL ?B.tc]++S[3].code++S[2].code++gen[GOTO l1]++genl[LABEL ?B.fc]
+}
+</code></pre>
+<h3 id="4_1">考点4：采用全局名的翻译样例<a class="headerlink" href="#4_1" title="Permanent link">&para;</a></h3>
+<p>就是写出各级符号表<code>xxx@table</code>和各级中间代码<code>xxx@code</code></p>
+<blockquote>
+<p>采用全局名的翻译样例
+<img alt="img" src="/imgs/compile/采用全局名的翻译样例.png" /></p>
+</blockquote>
+<h2 id="11_1">11. 运行时环境<a class="headerlink" href="#11_1" title="Permanent link">&para;</a></h2>
+<p><strong>真的很python</strong></p>
+<p>一个函数的栈帧可以分为三个部分, 记为
+f@frame:(&lt;参数区&gt;&lt;链接区&gt;&lt;局部区&gt;)
+- 参数区：位于栈底侧，存放形参，传入变量则存放实参地址，传入常量则直接存放常量。最外层栈帧没有参数区
+    - 按照参数从后向前顺序压栈(即维持参数从前向后地址增大的规律)，与中间代码顺序相同
+    - 函数作为形参：存放地址，指向局部区为其开辟的2单位空间中存着函数入口label的那一位
+    - 数组原型作为形参：放数组首地址
+- 链接区：从底到顶为：访问链，控制链，反链
+    - 访问链指向声明宿主的控制链, alink
+    - 控制链指向引用宿主的控制链, clink
+    - 反链不写, raddr
+- 局部区：存放局部变量，传入的实参也要再分配一遍空间
+    - <strong>SP</strong>：对于函数作为形参的情况，局部区存着被传入的函数的访问链（声明宿主）和代码入口f@label，参数区的对应位置就存放局部区存着入口那一位的地址</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.tabs.link"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../../js/mathjax-config.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
