@@ -51,7 +51,7 @@ $2^{n(表示位数)}-x(原码)$
 
 
 ## 2. 80x86计算机组织
-![img](/imgs/asm/asm汇编语言 notes_0.png)
+![img](../../imgs/asm/asm汇编语言 notes_0.png)
 ***answer***
 
 1. 软件和硬件
@@ -110,8 +110,8 @@ $2^{n(表示位数)}-x(原码)$
 	2. SS
 	3. DS
 	4. ES
-![img](/imgs/asm/asm汇编语言 notes_1.png)
-![img](/imgs/asm/asm汇编语言 notes_2.png)
+![img](../../imgs/asm/asm汇编语言 notes_1.png)
+![img](../../imgs/asm/asm汇编语言 notes_2.png)
 
 
 #### FLAGS
@@ -203,15 +203,15 @@ $2^{n(表示位数)}-x(原码)$
 
 	对于80386: 还有`颗粒度G(0->byte, 1->page(4KB)`, `D`, `AVL`
 
-![img](/imgs/asm/asm汇编语言 notes_3.png)
-![img](/imgs/asm/asm汇编语言 notes_4.png)
-![img](/imgs/asm/asm汇编语言 notes_5.png)
-![img](/imgs/asm/asm汇编语言 notes_6.png)
-![img](/imgs/asm/asm汇编语言 notes_7.png)
+![img](../../imgs/asm/asm汇编语言 notes_3.png)
+![img](../../imgs/asm/asm汇编语言 notes_4.png)
+![img](../../imgs/asm/asm汇编语言 notes_5.png)
+![img](../../imgs/asm/asm汇编语言 notes_6.png)
+![img](../../imgs/asm/asm汇编语言 notes_7.png)
 ### 外部设备
 三种寄存器
 
-![img](/imgs/asm/asm汇编语言 notes_8.png)
+![img](../../imgs/asm/asm汇编语言 notes_8.png)
 - 有时候,简单设备会将 *状态寄存器*和*命令寄存器*合并为*控制寄存器*
 - 每个寄存器给一个端口号port
 - I/O地址总线是16位, I/O地址空间为64K, 端口地址范围为`0000H-FFFFH`
@@ -233,15 +233,15 @@ DOS在开机时从磁盘装入存储器,更高级,可以调用若干次BIOS
 需要使用外设时的选择顺序: DOS->BIOS->自己编程序
 
 ### 内存分段管理的好处:
-![img](/imgs/asm/asm汇编语言 notes_9.png)
+![img](../../imgs/asm/asm汇编语言 notes_9.png)
 ## 3. 指令系统
-![img](/imgs/asm/asm汇编语言 notes_10.png)
+![img](../../imgs/asm/asm汇编语言 notes_10.png)
 
 
 
 
 1. *背*
-![img](/imgs/asm/asm汇编语言 notes_11.png)
+![img](../../imgs/asm/asm汇编语言 notes_11.png)
 
 
 #### 寻址方式
@@ -252,7 +252,7 @@ DOS在开机时从磁盘装入存储器,更高级,可以调用若干次BIOS
 	其他情况则缺省值均为DS
 
 ###### 16 bit: 8086/80286
-![img](/imgs/asm/asm汇编语言 notes_12.png)
+![img](../../imgs/asm/asm汇编语言 notes_12.png)
 - 直接寻址:`mov ax, val`: **注意，[100h]是汇编后的表示，应该使用符号地址,[100h]/ds:[100]会被认为是立即数**
 - 寄存器间接寻址:`mov ax, [bx]`
 - `mov as, 100H[bx]`
@@ -264,7 +264,7 @@ DOS在开机时从磁盘装入存储器,更高级,可以调用若干次BIOS
 
 *记记名字*
 
-![img](/imgs/asm/asm汇编语言 notes_13.png)
+![img](../../imgs/asm/asm汇编语言 notes_13.png)
 
 
 ###### 32 bit: 80386及以后
@@ -289,7 +289,7 @@ DOS在开机时从磁盘装入存储器,更高级,可以调用若干次BIOS
 - 段间
 	- 直接寻址: `jmp far ptr func_label` 直接跳到func_label函数处, 也可以用CS':SP', **经实验，段内直接跳转写far ptr好像也没毛病**
 	- 间接寻址:
-![img](/imgs/asm/asm汇编语言 notes_14.png)
+![img](../../imgs/asm/asm汇编语言 notes_14.png)
 
 
 
@@ -299,28 +299,28 @@ DOS在开机时从磁盘装入存储器,更高级,可以调用若干次BIOS
 
 ### 机器语言指令概况
 #### 操作码的机器语言表示
-![img](/imgs/asm/asm汇编语言 notes_15.png)
-![img](/imgs/asm/asm汇编语言 notes_16.png)
+![img](../../imgs/asm/asm汇编语言 notes_15.png)
+![img](../../imgs/asm/asm汇编语言 notes_16.png)
 
 
 #### 指令执行时间
-![img](/imgs/asm/asm汇编语言 notes_17.png)
+![img](../../imgs/asm/asm汇编语言 notes_17.png)
 
 
 ### 指令大全
 
 
-![img](/imgs/asm/asm汇编语言 notes_18.png)
+![img](../../imgs/asm/asm汇编语言 notes_18.png)
 #### 自查
-![img](/imgs/asm/asm汇编语言 notes_19.png)
-![img](/imgs/asm/asm汇编语言 notes_20.png)
+![img](../../imgs/asm/asm汇编语言 notes_19.png)
+![img](../../imgs/asm/asm汇编语言 notes_20.png)
 #### 数据传送
 - *注意传送的限制*
 - `push/pop`不允许立即数操作，可以reg/mem/segreg
 - `pushf/popf`: 专门用来保存FLAGS
 - *movsx, movzx*方便实现对有/无符号数的扩展
 - *pusha,pusad,popa,popad*: 80286/80386
-![img](/imgs/asm/asm汇编语言 notes_21.png)
+![img](../../imgs/asm/asm汇编语言 notes_21.png)
 - `I/O`: 前256端口可直接指定,之后先给DX
 - `xlat` / `xlat opr`: bx->table, ax->value
 - `lea/lds/les/lss/lfs/lgs reg, src`: src为存储器寻址, reg不能是段寄存器, *传送有效地址而非取地址中的值*
@@ -373,11 +373,11 @@ mul src
 
 只有CF/OF的变化有意义，取决于操作数是字节/字，由结果的高一半决定（即乘后结果是否还在原来的表示范围内）
 
-![img](/imgs/asm/asm汇编语言 notes_22.png)
+![img](../../imgs/asm/asm汇编语言 notes_22.png)
 > **Warning**: 操作数为*除立即数以外的寻址方式*
 
 
-![img](/imgs/asm/asm汇编语言 notes_23.png)
+![img](../../imgs/asm/asm汇编语言 notes_23.png)
 ##### **除法** -> **对于所有条件码无定义**
 
 
@@ -396,14 +396,14 @@ div src(div reg/mem) ; ax/src
 #### 逻辑运算
 ####### **逻辑计算**
 
-![img](/imgs/asm/asm汇编语言 notes_24.png)
+![img](../../imgs/asm/asm汇编语言 notes_24.png)
 ####### **移位指令**
 
-![img](/imgs/asm/asm汇编语言 notes_25.png)
+![img](../../imgs/asm/asm汇编语言 notes_25.png)
 > **Warning**: dst不可为段寄存器/立即数
 
 
-![img](/imgs/asm/asm汇编语言 notes_26.png)
+![img](../../imgs/asm/asm汇编语言 notes_26.png)
 **RCL/RCR**: 带进位的循环移位指令，补齐的是CF原来的值，而不带进位的是将最后移出的值同时补齐和赋给CF
 
 
@@ -418,8 +418,8 @@ div src(div reg/mem) ; ax/src
 
 386及以后有*位测试，位扫描, 双精度移位操作*
 
-![img](/imgs/asm/asm汇编语言 notes_27.png)
-![img](/imgs/asm/asm汇编语言 notes_28.png)
+![img](../../imgs/asm/asm汇编语言 notes_27.png)
+![img](../../imgs/asm/asm汇编语言 notes_28.png)
 
 
 #### 串处理指令
@@ -450,7 +450,7 @@ jmp见前面，**条件跳转只能用段内直接短转移（8位偏移地址/�
 ##### 循环指令
 循环指令对cx的操作不影响FLAGS
 
-![img](/imgs/asm/asm汇编语言 notes_29.png)
+![img](../../imgs/asm/asm汇编语言 notes_29.png)
 
 
 ##### 子程序调用/返回指令
@@ -467,12 +467,12 @@ jmp见前面，**条件跳转只能用段内直接短转移（8位偏移地址/�
 
 
 ##### 中断指令
-![img](/imgs/asm/asm汇编语言 notes_30.png)
+![img](../../imgs/asm/asm汇编语言 notes_30.png)
 
 
 #### 处理机控制指令
-![img](/imgs/asm/asm汇编语言 notes_31.png)
-![img](/imgs/asm/asm汇编语言 notes_32.png)
+![img](../../imgs/asm/asm汇编语言 notes_31.png)
+![img](../../imgs/asm/asm汇编语言 notes_32.png)
 还有一些，但是ppt上只有这几个
 
 
@@ -484,19 +484,19 @@ jmp见前面，**条件跳转只能用段内直接短转移（8位偏移地址/�
 #### 段定义
 - `xxx segment ... xxx ends`,
 	- `s_name segment [align_type] [combine_type] [use_type] ['class']`
-![img](/imgs/asm/asm汇编语言 notes_33.png)
-![img](/imgs/asm/asm汇编语言 notes_34.png)
-![img](/imgs/asm/asm汇编语言 notes_35.png)
+![img](../../imgs/asm/asm汇编语言 notes_33.png)
+![img](../../imgs/asm/asm汇编语言 notes_34.png)
+![img](../../imgs/asm/asm汇编语言 notes_35.png)
 - `assume xxx:xxx/nothing`: 不对段寄存器赋值，仅为了让汇编程序理解
 - 新版：`model`/`简化的段定义伪操作`
 	- model:
-![img](/imgs/asm/asm汇编语言 notes_36.png)
-![img](/imgs/asm/asm汇编语言 notes_37.png)
+![img](../../imgs/asm/asm汇编语言 notes_36.png)
+![img](../../imgs/asm/asm汇编语言 notes_37.png)
 	- 简化的段定义操作
-![img](/imgs/asm/asm汇编语言 notes_38.png)
+![img](../../imgs/asm/asm汇编语言 notes_38.png)
 		- 与简化段定义有关的预定义符号
-![img](/imgs/asm/asm汇编语言 notes_39.png)
-![img](/imgs/asm/asm汇编语言 notes_40.png)
+![img](../../imgs/asm/asm汇编语言 notes_39.png)
+![img](../../imgs/asm/asm汇编语言 notes_40.png)
 #### 程序命名和结束伪操作
 - `name`
 - `title`
@@ -592,11 +592,11 @@ data segment
 *定义*：常数/寄存器/标号/变量 + **操作符**
 
 ##### 操作符
-![img](/imgs/asm/asm汇编语言 notes_41.png)
-![img](/imgs/asm/asm汇编语言 notes_42.png)
-![img](/imgs/asm/asm汇编语言 notes_43.png)
-![img](/imgs/asm/asm汇编语言 notes_44.png)
-![img](/imgs/asm/asm汇编语言 notes_45.png)
+![img](../../imgs/asm/asm汇编语言 notes_41.png)
+![img](../../imgs/asm/asm汇编语言 notes_42.png)
+![img](../../imgs/asm/asm汇编语言 notes_43.png)
+![img](../../imgs/asm/asm汇编语言 notes_44.png)
+![img](../../imgs/asm/asm汇编语言 notes_45.png)
 **this**
 
 相当于对于同一个内存地址，起一个不同类型的别名
@@ -618,11 +618,11 @@ jmp_near:
 ### 汇编语言程序的上机过程
 - 准备汇编上机环境（masm/tasm)
 - 编写汇编源程序
-![img](/imgs/asm/asm汇编语言 notes_46.png)
-![img](/imgs/asm/asm汇编语言 notes_47.png)
-![img](/imgs/asm/asm汇编语言 notes_48.png)
-![img](/imgs/asm/asm汇编语言 notes_49.png)
-![img](/imgs/asm/asm汇编语言 notes_50.png)
+![img](../../imgs/asm/asm汇编语言 notes_46.png)
+![img](../../imgs/asm/asm汇编语言 notes_47.png)
+![img](../../imgs/asm/asm汇编语言 notes_48.png)
+![img](../../imgs/asm/asm汇编语言 notes_49.png)
+![img](../../imgs/asm/asm汇编语言 notes_50.png)
 #### DOS装入.exe文件过程
 1. PSP(256 bytes)
 2. file header
@@ -653,9 +653,9 @@ ah=4c --> 功能号, al=00 --> 返回码
 
 
 ## 5. 循环与分支程序
-![img](/imgs/asm/asm汇编语言 notes_51.png)
+![img](../../imgs/asm/asm汇编语言 notes_51.png)
 ### 循环
-![img](/imgs/asm/asm汇编语言 notes_52.png)
+![img](../../imgs/asm/asm汇编语言 notes_52.png)
 **实验：打印bx的十六进制形式**
 
 > ah=2->按照ascii码打印dl
@@ -663,7 +663,7 @@ ah=4c --> 功能号, al=00 --> 返回码
 
 **循环未必要用cx，尤其是循环体中需要使用cx（例如循环移位cnt）的时候**
 
-![img](/imgs/asm/asm汇编语言 notes_53.png)
+![img](../../imgs/asm/asm汇编语言 notes_53.png)
 ### 分支
 **两种方法，条件跳转/跳跃表**
 
@@ -716,7 +716,7 @@ end start
 
 
 ## 6. 子程序结构
-![img](/imgs/asm/asm汇编语言 notes_54.png)
+![img](../../imgs/asm/asm汇编语言 notes_54.png)
 
 
 ### proc
@@ -771,7 +771,7 @@ name.val3 dw 1
 ```
 **可以自由进行初始化，也可以覆盖struc定义中的默认初值**
 
-![img](/imgs/asm/asm汇编语言 notes_55.png)
+![img](../../imgs/asm/asm汇编语言 notes_55.png)
 **这里的struc比较宽松，每一个地址表达式都可以作为struc_name, .xxx就是将地址表达式的地址作为开头时其对应成员的偏移地址**, 如下
 
 ```asm
@@ -818,7 +818,7 @@ ds:dx为缓冲区首地址
 
 
 ## 7. 高级汇编语言技巧
-![img](/imgs/asm/asm汇编语言 notes_56.png)
+![img](../../imgs/asm/asm汇编语言 notes_56.png)
 
 
 ### 宏指令
@@ -835,8 +835,8 @@ endm
 
 和C的宏类似，只是文本的替换
 
-![img](/imgs/asm/asm汇编语言 notes_57.png)
-![img](/imgs/asm/asm汇编语言 notes_58.png)
+![img](../../imgs/asm/asm汇编语言 notes_57.png)
+![img](../../imgs/asm/asm汇编语言 notes_58.png)
 - 没有local定义的标号会被当作宏定义之外的标号
 - `purge macro_name` 可以删除宏定义
 - 当宏指令名与已有标号/变量/指令助记符冲突时，宏优先
@@ -846,7 +846,7 @@ endm
 
 #####  ;; 不会展开的注释
 #####  % 表达式展开
-![img](/imgs/asm/asm汇编语言 notes_59.png)
+![img](../../imgs/asm/asm汇编语言 notes_59.png)
 ##### :req 必须的哑元
 #####  :=哑元缺省值
 
@@ -858,7 +858,7 @@ endm
 
 **2. 宏定义中有宏定义**
 
-![img](/imgs/asm/asm汇编语言 notes_60.png)
+![img](../../imgs/asm/asm汇编语言 notes_60.png)
 
 
 #### 列表伪指令
@@ -882,9 +882,9 @@ endm
 
 ### 重复汇编
 #### rept
-![img](/imgs/asm/asm汇编语言 notes_61.png)
+![img](../../imgs/asm/asm汇编语言 notes_61.png)
 #### irp/irpc
-![img](/imgs/asm/asm汇编语言 notes_62.png)
+![img](../../imgs/asm/asm汇编语言 notes_62.png)
 ```asm
 irp reg <ax,bx,cx,dx>
 	push reg
@@ -900,12 +900,12 @@ push dx
 ```
 
 
-![img](/imgs/asm/asm汇编语言 notes_63.png)
-![img](/imgs/asm/asm汇编语言 notes_64.png)
+![img](../../imgs/asm/asm汇编语言 notes_63.png)
+![img](../../imgs/asm/asm汇编语言 notes_64.png)
 
 
 ### 条件汇编
-![img](/imgs/asm/asm汇编语言 notes_65.png)
+![img](../../imgs/asm/asm汇编语言 notes_65.png)
 ##### example
 1. 根据跳转距离自动决定是short/near ptr
 ```
@@ -1007,7 +1007,7 @@ call disp
 
 
 ## 8. 输入输出程序设计
-![img](/imgs/asm/asm汇编语言 notes_66.png)
+![img](../../imgs/asm/asm汇编语言 notes_66.png)
 **in/out控制一切设备**
 
 
@@ -1020,23 +1020,23 @@ call disp
 
 
 ### DMA
-![img](/imgs/asm/asm汇编语言 notes_67.png)
-![img](/imgs/asm/asm汇编语言 notes_68.png)
-![img](/imgs/asm/asm汇编语言 notes_69.png)
-![img](/imgs/asm/asm汇编语言 notes_70.png)
+![img](../../imgs/asm/asm汇编语言 notes_67.png)
+![img](../../imgs/asm/asm汇编语言 notes_68.png)
+![img](../../imgs/asm/asm汇编语言 notes_69.png)
+![img](../../imgs/asm/asm汇编语言 notes_70.png)
 
 
 ### Example
 **发声程序**
 
-![img](/imgs/asm/asm汇编语言 notes_71.png)
+![img](../../imgs/asm/asm汇编语言 notes_71.png)
 **查询方式打印输出**
 
-![img](/imgs/asm/asm汇编语言 notes_72.png)
+![img](../../imgs/asm/asm汇编语言 notes_72.png)
 
 
 ### 中断
-![img](/imgs/asm/asm汇编语言 notes_73.png)
+![img](../../imgs/asm/asm汇编语言 notes_73.png)
 #### 硬件中断（外中断）
 ##### NMI(Non Markable Interrupt)
 - NMI脚引入
@@ -1056,15 +1056,15 @@ call disp
 
 *经实验，关掉键盘还真就输入不了了*
 
-![img](/imgs/asm/asm汇编语言 notes_74.png)
-![img](/imgs/asm/asm汇编语言 notes_75.png)
+![img](../../imgs/asm/asm汇编语言 notes_74.png)
+![img](../../imgs/asm/asm汇编语言 notes_75.png)
 ####### 中断命令寄存器 20H
 
-![img](/imgs/asm/asm汇编语言 notes_76.png)
+![img](../../imgs/asm/asm汇编语言 notes_76.png)
 
 
 ####  软件中断(内中断)
-![img](/imgs/asm/asm汇编语言 notes_77.png)
+![img](../../imgs/asm/asm汇编语言 notes_77.png)
 
 
 ##### 存取中断向量 & 中断向量表
@@ -1074,11 +1074,11 @@ call disp
 
 **256个中断向量，每个占4字节，低字节为IP，高字节为CS，一共占1KB，位于0000:0000-0000:03FFH**
 
-![img](/imgs/asm/asm汇编语言 notes_78.png)
-![img](/imgs/asm/asm汇编语言 notes_79.png)
+![img](../../imgs/asm/asm汇编语言 notes_78.png)
+![img](../../imgs/asm/asm汇编语言 notes_79.png)
 #### 中断优先级
-![img](/imgs/asm/asm汇编语言 notes_80.png)
-![img](/imgs/asm/asm汇编语言 notes_81.png)
+![img](../../imgs/asm/asm汇编语言 notes_80.png)
+![img](../../imgs/asm/asm汇编语言 notes_81.png)
 
 
 #### 中断嵌套
@@ -1090,7 +1090,7 @@ call disp
 
 
 ## 9. BIOS & DOS 中断
-![img](/imgs/asm/asm汇编语言 notes_82.png)
+![img](../../imgs/asm/asm汇编语言 notes_82.png)
 ### 键盘IO
 #### DOS I/O int 21h
 ##### 输入单个字符
@@ -1144,21 +1144,21 @@ ds:dx为缓冲区首地址
 
 
 #### BIOS 键盘中断 int 16h
-![img](/imgs/asm/asm汇编语言 notes_83.png)
+![img](../../imgs/asm/asm汇编语言 notes_83.png)
 
 
 ### 显示器I/O
-![img](/imgs/asm/asm汇编语言 notes_84.png)
+![img](../../imgs/asm/asm汇编语言 notes_84.png)
 
 
 #### BIOS 显示器中断 int 10h
 **直接存取显示储存器需要知道显示储存器的起始地址，使用int 10h就可以直接对其进行操作**
 
-![img](/imgs/asm/asm汇编语言 notes_85.png)
+![img](../../imgs/asm/asm汇编语言 notes_85.png)
 
 
 ###### exp : print heart
-![img](/imgs/asm/asm汇编语言 notes_86.png)
+![img](../../imgs/asm/asm汇编语言 notes_86.png)
 #### DOS 显示器 I/O
 
 
