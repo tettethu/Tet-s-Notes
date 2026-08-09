@@ -10,6 +10,10 @@ nav:
     - 大二下:
       - index: class_notes/2_2/index.md
       - 形式语言与编译: class_notes/2_2/compile.md
+    - 大三上:
+      - index: class_notes/3_1/index.md
+      - 数据库: class_notes/3_1/database.md
+      - 机器学习: class_notes/3_1/ml.md
 
 theme:
   name: material
